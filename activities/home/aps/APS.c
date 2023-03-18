@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <math.h>
 #ifdef _WIN32
     char clean[100] = "cls";
 #elif __linux__ || __APPLE__
@@ -87,8 +88,24 @@ void real_fee(){
 
 //sec2
 void coin_conveter(){
-
     title();
+}
+
+//sec5
+void school_save(){
+    title();
+    float course_fee, course_long, age, monthly_valuation_tax, course_price, save;
+    input("%f", "Digite o valor da mensalidade em R$: ", &course_fee);
+    input("%f", "Digite o tempo do curso em anos: ", &course_long);
+    input("%f", "Digite a idade atual do filho: ", &age);
+    input("%f", "Digite a taxa de juros mensal dos investimentos: ", &monthly_valuation_tax);
+
+    course_price = course_fee * (course_long*12);
+    save = (course_price * monthly_valuation_tax) / (pow(1+monthly_valuation_tax, 12*(18-age))-1);
+
+    printf("O valor total do curso após 5 anos é R$%.2f", course_price);
+    printf("\nVocê deve poupar R$%.2f por mês\n", save);
+
 }
 
 int main(){
@@ -105,6 +122,11 @@ int main(){
 
             case 2:
                 coin_conveter();
+                back();
+                break;
+
+            case 5:
+                school_save();
                 back();
                 break;
 

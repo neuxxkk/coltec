@@ -3,6 +3,8 @@
 #include <ctype.h>
 #include <string.h>
 #include <math.h>
+#include <unistd.h>
+
 #ifdef _WIN32
     char clean[100] = "cls";
 #elif __linux__ || __APPLE__
@@ -15,44 +17,38 @@ int option;
 
 char *titulos[] = {
     "Calculo dos juros reais",
-    "Conversão de moedas",
-    "Calculo da reserva de emergência",
+    "Conversao de moedas",
+    "Calculo da reserva de emergencia",
     "Juros compostos com deposito mensal",
-    "Poupança para a faculdade",
+    "Poupanca para a faculdade",
     "Plano para juntar dinheiro",
-    "Simulador de empréstimo",
-    "Cálculo do imposto de renda",
-    "Independência Financeira"
+    "Simulador de emprestimo",
+    "Calculo do imposto de renda",
+    "Independencia Financeira"
 };
 
-void input(char *type, char *msg, void *var){
-    if(msg == NULL){msg = "";}
+struct system{
+    void(*inp)();
+    void(*back)();
+    void(*title)();
+};
+
+
+void input(const char *type, const char *msg, void *var) {
+    if (msg == NULL) {
+        msg = "";
+    }
     printf("%s", msg);
-    scanf(type, var);
+    if (scanf(type, var) == 1) {
+       return;
+    } else {
+        printf("Entrada invalida\n");
+        getchar();
+        input(type, msg, var);
+    }
 }
 
-void menu(){
-    system(clean);
-    for(int i=0; i<=100; ++i){
-        if(i==50){printf("\nMYMONEY – DIGITE A OPÇÃO DESEJADA\n");}
-        else{printf("*");}
-    }
-    
-    printf("\n");
 
-    for (int n = 1; n < 10; ++n){
-        printf("(%i) %s\n"    , n, titulos[n-1]);
-    }
-
-    printf("(0) Sair\n");
-
-    for (int o = 0; o < 50; ++o){
-        printf("*");
-    }
-
-    printf("\n: ");
-    input("%i", NULL, &option);
-}
 
 void back(){
     int back;
@@ -71,44 +67,229 @@ void title(){
         str[z] = toupper(str[z]);
     }
 
-    printf("\n%s\n", str);
+    printf("\n%s\n\n", str);
 }
+
+struct system sys = {input, back, title};
+
+void menu(){
+    system(clean);
+    for(int i=0; i<=100; ++i){
+        if(i==50){printf("\nMYMONEY – DIGITE A OPCAO DESEJADA\n");}
+        else{printf("*");}
+    }
+    
+    printf("\n");
+
+    for (int n = 1; n < 10; ++n){
+        printf("(%i) %s\n"    , n, titulos[n-1]);
+    }
+
+    printf("(0) Sair\n");
+
+    for (int o = 0; o < 50; ++o){
+        printf("*");
+    }
+
+    sys.inp("%i", "\n:", &option);
+}
+
+struct sections{
+    void (*sec1)();
+    void (*sec2)();
+    void (*sec3)();
+    void (*sec4)();
+    void (*sec5)();
+    void (*sec6)();
+    void (*sec7)();
+    void (*sec8)();
+    void (*sec9)();
+};
 
 //sec1
 void real_fee(){
-    title();
+    sys.title();
     float nominal_fee, inflation, real_fee;
-    input("%f", "Digite a taxa de juros nominal a.a. em %: ", &nominal_fee);
-    input("%f", "Digite a taxa de inflação a.a. em %: ", &inflation);
+    sys.inp("%f", "Digite a taxa de juros nominal a.a. em %: ", &nominal_fee);
+    sys.inp("%f", "Digite a taxa de inflacao a.a. em %: ", &inflation);
 
     real_fee = ((1+nominal_fee/100) / (1+inflation/100) - 1)*100;
 
-    printf("Taxa de juros reais a.a. em %: %.2f\n", real_fee);
+    printf("Taxa de juros reais a.a. em %%: %.2f\n", real_fee);
 }
 
 //sec2
-void coin_conveter(){
-    title();
+void coin_converter(){
+    sys.title();
+
+    char *coins[] = {"Real (BRL)", "Dolar (USD)", "Euro (EUR)", "Libra Esterlina (GBP)"};
+    option = 0;
+    float bv, av;
+
+    struct coin{
+    char* name;
+    double fee;
+    };
+    struct coin array[] = {
+        {"Dolar (USD) -> Real (BRL)", 5.27},
+        {"Euro (EUR) -> Real (BRL)", 6.22},
+        {"Libra Esterlina (GBP) -> Real (BRL)", 7.24},
+        {"Real (BRL) -> Dolar (USD)", 0.19},
+        {"Real (BRL) -> Euro (EUR)", 0.16},
+        {"Real (BRL) -> Libra Esterlina (GBP)", 0.14}
+    };
+
+    int array_size = sizeof(array)/sizeof(array[0]);
+
+    printf("Selecione a conversao desejada\n");
+    for (int i=0; i<array_size; ++i){
+        printf("(%i) %s\n", i+1, array[i].name);
+    }
+
+    sys.inp("%i",  ": ", &option);
+
+    int from, to;
+    if(option<=3){
+        from=option;
+        to=0;
+    }else if(option<=6){
+        from=0;
+        to=option-3;
+    }else{
+        printf("Opcao invlida");
+        sleep(1);
+        coin_converter();
+    }
+    system(clean);
+    printf("Digite o valor em %s a ser convertido: ", coins[from]);
+    scanf("%f", &bv);
+    av = bv*array[option-1].fee;
+
+    printf("Valor correspondente em %s: %.2f\n", coins[to], av);
+
+}
+
+//sec3
+void emergency_save(){
+    sys.title();
+}
+
+//sec4
+void compound_fee(){
+    sys.title();
 }
 
 //sec5
 void school_save(){
-    title();
+    sys.title();
     float course_fee, course_long, age, monthly_valuation_tax, course_price, save;
-    input("%f", "Digite o valor da mensalidade em R$: ", &course_fee);
-    input("%f", "Digite o tempo do curso em anos: ", &course_long);
-    input("%f", "Digite a idade atual do filho: ", &age);
-    input("%f", "Digite a taxa de juros mensal dos investimentos: ", &monthly_valuation_tax);
+    sys.inp("%f", "Digite o valor da mensalidade em R$: ", &course_fee);
+    sys.inp("%f", "Digite o tempo do curso em anos: ", &course_long);
+    sys.inp("%f", "Digite a idade atual do filho: ", &age);
+    sys.inp("%f", "Digite a taxa de juros mensal dos investimentos: ", &monthly_valuation_tax);
 
     course_price = course_fee * (course_long*12);
-    save = (course_price * monthly_valuation_tax) / (pow(1+monthly_valuation_tax, 12*(18-age))-1);
+    save = (course_price*monthly_valuation_tax) / (pow(1+monthly_valuation_tax, 12*(18-age))-1);
 
-    printf("O valor total do curso após 5 anos é R$%.2f", course_price);
-    printf("\nVocê deve poupar R$%.2f por mês\n", save);
+    printf("O valor total do curso apos 5 anos e R$ %.2f", course_price);
+    printf("\nVoce deve poupar R$ %.2f por mes\n", save);
+}
 
+//sec6
+void save_plan(){
+    sys.title();
+}
+
+//sec7
+void simulator(){
+    sys.title();
+}
+
+//sec8
+void taxs(){
+    sys.title();
+    
+    float capital, total, net_profit, gross_profit, iof, alq;
+    int opt, days;
+
+    input("%i", "(1) Renda fixa\n(2) Acoes\n: ", &opt);
+
+    if(opt == 1){
+
+        input("%f", "\nDigite o valor total investido em R$: ", &capital);
+        input("%f", "Digite o valor total resgatado em R$: ", &total);
+        input("%i", "Digite o tempo total do investimento em dias:", &days);
+        
+        alq = 0;
+        gross_profit = total - capital;
+
+        if(days < 1){
+            alq = 0.2;
+        }else if(total < 20000){
+            alq = 0.15;
+        }
+
+        net_profit = gross_profit * (1 - alq);
+
+        printf("Lucro bruto: R$ %.2f\n", gross_profit);
+        printf("Lucro liquido: R$ %.2f\n", net_profit);
+        printf("Imposto de renda retido: R$ %.2f\n", (gross_profit * alq));
+
+    }else if(opt==2){
+
+        input("%f", "\nDigite o valor total investido em R$: ", &capital);
+        input("%f", "Digite o valor total resgatado em R$: ", &total);
+        input("%i", "Digite o tempo total do investimento em dias:", &days);
+
+        if(days <= 180){
+            alq = 0.225;
+        }
+        else if(days <= 360){
+            alq = 0.2;
+        }
+        else if(days <= 720){
+            alq = 0.175;
+        }
+        else{
+            alq = 0.15;
+        }
+
+        iof = 1 - (days*0.0333);
+
+        gross_profit = total - capital;
+        net_profit = (gross_profit - (iof * gross_profit)) - (alq * gross_profit);
+
+        printf("Lucro bruto: R$ %.2f\n", gross_profit);
+        printf("Lucro liquido: R$ %.2f\n", net_profit);
+        printf("IOF retido: R$ %.2f\n", iof * gross_profit);
+        printf("Imposto de renda retido: R$ %.2f\n", (gross_profit - (iof * gross_profit)) * alq);
+
+    }else{
+        printf("Opcao invalida");
+        sleep(1);
+        taxs();
+    }
+}
+
+//sec9
+void financial_indep(){
+    sys.title();
 }
 
 int main(){
+
+    struct sections sec = {
+        real_fee,
+        coin_converter,
+        emergency_save,
+        compound_fee,
+        school_save,
+        save_plan,
+        simulator,
+        taxs,
+        financial_indep
+    };
+
     do{
         menu();
         switch(option){
@@ -116,22 +297,52 @@ int main(){
             case 0:break;
 
             case 1:
-                real_fee();
-                back();
+                sec.sec1();
+                sys.back();
                 break;
 
             case 2:
-                coin_conveter();
-                back();
+                sec.sec2();
+                sys.back();
+                break;
+
+            case 3:
+                sec.sec3();
+                sys.back();
+                break;
+
+            case 4:
+                sec.sec4();
+                sys.back();
                 break;
 
             case 5:
-                school_save();
-                back();
+                sec.sec5();
+                sys.back();
+                break;
+
+            case 6:
+                sec.sec6();
+                sys.back();
+                break;
+
+            case 7:
+                sec.sec7();
+                sys.back();
+                break;
+
+            case 8:
+                sec.sec8();
+                sys.back();
+                break;
+
+            case 9:
+                sec.sec9();
+                sys.back();
                 break;
 
             default:
-                printf("Opcão inválida\n");
+                printf("Opcao invalida\n");
                 sleep(1);
         }
     }while(option!=0);

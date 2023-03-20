@@ -63,14 +63,14 @@ void title(){
     system(clean);
     char str[100];
     strcpy(str, titulos[option-1]);
-    for (int z = 0; str[z]; ++z){
-        str[z] = toupper(str[z]);
+    for (int i = 0; str[i]; ++i){
+        str[i] = toupper(str[i]);
     }
 
     printf("\n%s\n\n", str);
 }
 
-struct system sys = {input, back, title};
+struct system sys = {input, back, title}; //instanciating the functions in the struct
 
 void menu(){
     system(clean);
@@ -106,7 +106,7 @@ struct sections{
     void (*sec9)();
 };
 
-//sec1
+//sec1 #
 void real_fee(){
     sys.title();
     float nominal_fee, inflation, real_fee;
@@ -118,7 +118,7 @@ void real_fee(){
     printf("Taxa de juros reais a.a. em %%: %.2f\n", real_fee);
 }
 
-//sec2
+//sec2 #
 void coin_converter(){
     sys.title();
 
@@ -130,6 +130,9 @@ void coin_converter(){
     char* name;
     double fee;
     };
+
+    //improvised dict in C by instanciating a struct inside another
+
     struct coin array[] = {
         {"Dolar (USD) -> Real (BRL)", 5.27},
         {"Euro (EUR) -> Real (BRL)", 6.22},
@@ -169,17 +172,44 @@ void coin_converter(){
 
 }
 
-//sec3
+//sec3 #
 void emergency_save(){
     sys.title();
+    float salary, costs, reserv, save_m;
+    int time;
+
+    input("%f", "Digite o valor do salario mensal em R$: ", &salary);
+    input("%f", "Digite o valor das despesas mensais em R$: ", &costs);
+
+    save_m = salary - costs;
+    reserv = costs * 6;
+    time = reserv / save_m;
+
+    printf("Sua reserva de emergencia deve ser de R$ %.2f\n", reserv);
+    printf("Serao necessarios %i meses para atingir esse valor poupando R$ %.2f por mes.\n", time, save_m);
 }
 
-//sec4
+//sec4 #
 void compound_fee(){
     sys.title();
+    int t;
+    float c, i, d, M;
+
+    input("%f", "Digite o valor do investimento inicial em R$: ", &c);
+    input("%f", "Digite o valor dos depositos mensais em R$: ", &d);
+    input("%f", "Digite a taxa de juros mensal: ", &i);
+    input("%i", "Digite o periodo de tempo em meses: ", &t);
+
+    M = c;
+
+    for (int n=1;n<t; ++n){
+        M = M * (1+i) + d;
+    }
+
+    printf("O valor ao final de %i meses sera R$ %.2f\n", t, M);
 }
 
-//sec5
+//sec5 #
 void school_save(){
     sys.title();
     float course_fee, course_long, age, monthly_valuation_tax, course_price, save;
@@ -195,9 +225,32 @@ void school_save(){
     printf("\nVoce deve poupar R$ %.2f por mes\n", save);
 }
 
-//sec6
+//sec6 #
 void save_plan(){
     sys.title();
+    int time = 0;
+    float salary, cost_b, cost_l, goal, fee, M, save;
+
+    input("%f", "Digite o valor da renda atual em R$: ", &salary);
+    input("%f", "Digite o percentual de gastos basicos: ", &cost_b);
+    input("%f", "Digite o percentual de gastos com estilo de vida: ", &cost_l);
+    input("%f", "Digite o objetivo finaceiro em R$: ", &goal);
+    input("%f", "Digite a taxa de juros mensal dos investimentos: ", &fee);
+
+    cost_l = (cost_l/100) * salary;
+    cost_b = (cost_b/100) * salary;
+    save = salary - (cost_l+cost_b);
+    M = save;
+
+    do{
+        ++time;
+        M = M * (1+fee) + save;
+    }while(M<goal);
+
+    printf("Total em gatos  basicos: R$ %.2f\n", cost_b);
+    printf("Total em gatos  com estilo de vida: R$ %.2f\n", cost_l);
+    printf("Total a ser poupado: R$ %.2f\n", salary - (cost_l+cost_b));
+    printf("Tempo para atingir objetivo financeiro %i meses\n", time);
 }
 
 //sec7
@@ -205,14 +258,14 @@ void simulator(){
     sys.title();
 }
 
-//sec8
+//sec8 #
 void taxs(){
     sys.title();
     
     float capital, total, net_profit, gross_profit, iof, alq;
     int opt, days;
 
-    input("%i", "(1) Renda fixa\n(2) Acoes\n: ", &opt);
+    input("%i", "(1) Acoes\n(2) Renda fixa\n: ", &opt);
 
     if(opt == 1){
 
@@ -241,6 +294,8 @@ void taxs(){
         input("%f", "Digite o valor total resgatado em R$: ", &total);
         input("%i", "Digite o tempo total do investimento em dias:", &days);
 
+        gross_profit = total - capital;
+
         if(days <= 180){
             alq = 0.225;
         }
@@ -254,15 +309,14 @@ void taxs(){
             alq = 0.15;
         }
 
-        iof = 1 - (days*0.0333);
+        iof = (1 - (days*0.0333))*gross_profit;
 
-        gross_profit = total - capital;
-        net_profit = (gross_profit - (iof * gross_profit)) - (alq * gross_profit);
+        net_profit = (gross_profit - iof) * (1 - alq);
 
         printf("Lucro bruto: R$ %.2f\n", gross_profit);
         printf("Lucro liquido: R$ %.2f\n", net_profit);
-        printf("IOF retido: R$ %.2f\n", iof * gross_profit);
-        printf("Imposto de renda retido: R$ %.2f\n", (gross_profit - (iof * gross_profit)) * alq);
+        printf("IOF retido: R$ %.2f\n", iof);
+        printf("Imposto de renda retido: R$ %.2f\n", (gross_profit - iof) * alq);
 
     }else{
         printf("Opcao invalida");

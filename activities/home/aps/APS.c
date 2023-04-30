@@ -35,13 +35,12 @@ struct system{
 
 
 void input(const char *type, const char *msg, void *var) {
-    if (msg == NULL) {
+    if (msg == NULL)
         msg = "";
-    }
     printf("%s", msg);
-    if (scanf(type, var) == 1) {
+    if (scanf(type, var) == 1)
        return;
-    } else {
+    else{
         printf("Entrada invalida\n");
         getchar();
         input(type, msg, var);
@@ -52,7 +51,7 @@ void input(const char *type, const char *msg, void *var) {
 
 void back(){
     int back;
-    input("%i", ("\n1. Menu \t\t\t\t 2. Sair\n: "), &back);
+    input("%i", ("\n1. Menu \t\t\t\t\t\t\t\t      2. Sair\n: "), &back);
     switch(back){
         case 1:break;
         case 2:exit(0);
@@ -63,9 +62,8 @@ void title(){
     system(clean);
     char str[100];
     strcpy(str, titulos[option-1]);
-    for (int i = 0; str[i]; ++i){
+    for (int i = 0; str[i]; ++i)
         str[i] = toupper(str[i]);
-    }
 
     printf("\n%s\n\n", str);
 }
@@ -75,21 +73,17 @@ struct system sys = {input, back, title}; //instanciating the functions in the s
 void menu(){
     system(clean);
     for(int i=0; i<=100; ++i){
-        if(i==50){printf("\nMYMONEY – DIGITE A OPCAO DESEJADA\n");}
-        else{printf("*");}
+        if(i==50) printf("\nMYMONEY – DIGITE A OPCAO DESEJADA\n"); 
+        else printf("*");
     }
     
     printf("\n");
 
-    for (int n = 1; n < 10; ++n){
-        printf("(%i) %s\n"    , n, titulos[n-1]);
-    }
+    for (int n = 1; n < 10; ++n) printf("(%i) %s\n", n, titulos[n-1]);
 
     printf("(0) Sair\n");
 
-    for (int o = 0; o < 50; ++o){
-        printf("*");
-    }
+    for (int o = 0; o < 50; ++o) printf("*");
 
     sys.inp("%i", "\n:", &option);
 }
@@ -134,12 +128,12 @@ void coin_converter(){
     //improvised dict in C by instanciating a struct inside another
 
     struct coin array[] = {
-        {"Dolar (USD) -> Real (BRL)", 5.27},
-        {"Euro (EUR) -> Real (BRL)", 6.22},
-        {"Libra Esterlina (GBP) -> Real (BRL)", 7.24},
+        {"Dolar (USD) -> Real (BRL)", 5.12},
+        {"Euro (EUR) -> Real (BRL)", 5.40},
+        {"Libra Esterlina (GBP) -> Real (BRL)", 6.29},
         {"Real (BRL) -> Dolar (USD)", 0.19},
-        {"Real (BRL) -> Euro (EUR)", 0.16},
-        {"Real (BRL) -> Libra Esterlina (GBP)", 0.14}
+        {"Real (BRL) -> Euro (EUR)", 0.18},
+        {"Real (BRL) -> Libra Esterlina (GBP)", 0.16}
     };
 
     int array_size = sizeof(array)/sizeof(array[0]);
@@ -256,8 +250,34 @@ void save_plan(){
 //sec7
 void simulator(){
     sys.title();
-}
 
+    float total_financiado, juros_mensal, juros_final, total_final, amortizacao, divida, parcela;
+    int numero_prestacoes;
+    
+    float prestacoes[120];
+
+    input("%f", "Digite o valor total a ser financiado em R$: ", &total_financiado);
+    input("%i", "Digite o numero de prestacoes mensais: ", &numero_prestacoes);
+    input("%f", "Digite a taxa de juros mensal do financiamento: ", &juros_mensal);
+    
+    amortizacao = total_financiado/numero_prestacoes;
+    divida = total_financiado;
+    
+    for (int i = 0; i < numero_prestacoes; ++i){
+        parcela = amortizacao + (juros_mensal * divida);
+        prestacoes[i] = parcela;
+        total_final += parcela;
+        divida -= amortizacao;  
+    }
+    
+    juros_final = total_final - total_financiado;
+    
+    printf("\nTotal pago em juros: R$ %.2f\n", juros_final);
+    printf("Total do financiamento: R$ %.2f\n", total_final);
+    printf("\nValor da 1 prestacao: R$ %.2f\n", prestacoes[0]);
+    for(int n=0;n<12;++n) printf("Valor da %d0 prestacao: R$ %.2f\n", n+1,prestacoes[((n+1)*10)-1]);
+}
+    
 //sec8 #
 void taxs(){
     sys.title();
@@ -327,7 +347,42 @@ void taxs(){
 
 //sec9
 void financial_indep(){
-    sys.title();
+
+    float PMT, i = 0.002, n, FV; //PMT = aporte; i = taxa a.m; n = periodo; FV = montante;
+    float matriz[17][10];
+
+    do{
+        sys.title();
+        input("%f", "Digite o valor da meta para indepencia financeira em R$: ", &FV);
+        if (FV<0){
+            printf("\nValor inválido!\n");
+            sleep(1);
+            system(clean);
+        }
+    }while (FV<0);
+
+    printf("\n\t\t\t\t\t  \033[1m\033[4;41mPRAZO\n");
+    printf("\033[45mTAXA\033[0m\033[1m\t3\t5\t7");
+    for(int o=10;o<41;o+=5) printf("\t%i",o);
+
+    for (int x = 0; x < 17; x ++){
+        n = 36;
+        printf("\033[1m\n%.2f%%\033[0m",i*100);
+
+        for (int j = 0; j < 10; j ++){
+            PMT = (FV*i)/(pow((1+i), n)-1)  ;
+            if (n<84) n += 24;
+            else if (n==84) n += 36;
+            else n += 60; 
+            printf("\t%.2f",PMT);
+            matriz[x][j] = PMT;
+        }
+
+        i += 0.0005;
+    }
+
+    printf("\n");
+
 }
 
 int main(){
@@ -380,7 +435,7 @@ int main(){
                 sys.back();
                 break;
 
-            case 7:
+            case 7: 
                 sec.sec7();
                 sys.back();
                 break;

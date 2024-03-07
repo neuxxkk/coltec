@@ -1,18 +1,22 @@
 int cells[][];
-int scale = 6;
+int scale = 3;
 int size;
+int count;
 
 void setup() {
   size(600, 600);
   size = width/scale;
   background(255);
-  frameRate(10);
+  frameRate(100);
   
   cells = new int[size][size];
   
   for (int i=0; i<size; i++) {
     for (int j=0; j<size; j++) {
-      cells[i][j] = (int) random(3);
+       float p= random(1);
+       if (p<=0.5) cells[i][j] = 0;
+       else if (p>0.5 && p<=0.75) cells[i][j] = 1;
+       else cells[i][j] = 2;
     }
   }
   
@@ -22,7 +26,7 @@ void drawCells() {
   stroke(200);
   for (int i=0; i<size; i++) {
     for (int j=0; j<size; j++) {
-        if (cells[i][j]==0) fill(255);
+        if (cells[i][j]==0){ fill(255);}
         else if (cells[i][j]==1) fill(#228b22);
         else fill(#22228b);
         rect(i*scale, j*scale, scale, scale);
@@ -31,41 +35,47 @@ void drawCells() {
 }
 
 int checkLiving(int i, int j){
-  int livingNeighbors = 0;
+  int differentNeighbors = 0;
   for (int ki = -1; ki < 2; ki++) {
     for (int kj = -1; kj < 2; kj++) {
-      livingNeighbors += (cells[(i + ki + size) % size][(j + kj + size) % size]==cells[i][j]) ? 1 : 0;
+      if (cells[(i + ki + size) % size][(j + kj + size) % size] == cells[i][j]) differentNeighbors++;
     }
-  }
-  return livingNeighbors-1;
+  }  
+  return differentNeighbors-1;
 }
 
 
 
 
 void cycleOfLife() {
+  count=0;
+  int ln=0;
   int[][] newG = new int[size][size];
   
   for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
-      int ln = checkLiving(i, j); 
+    for (int j = 0; j < size; j++) { 
       
-      if (cells[i][j]>0) {
-        if (ln < 4) {
+      if (cells[i][j]!=0) {
+        ln = checkLiving(i, j);
+        if (ln < 4) { //insatisfeito
+          count++;
           newG[i][j] = 0;
           while(true){
-            int n = (int)random(size); 
-            int m = (int)random(size);
-            if (cells[n][m]==0 && newG[n][m]==0){
-              newG[m][n] = cells[i][j];
+            int fi = (int)random(size); 
+            int fj = (int)random(size);
+            if (cells[fi][fj]==0 && newG[fi][fj]==0){
+              newG[fi][fj] = cells[i][j];
               break;
             }
           }
-        }else newG[i][j] = cells[i][j];
+        }else{
+          newG[i][j] = cells[i][j];
+        }
       }
     }
   }
   cells=newG;
+  println(count);
 }
 
 void draw() {

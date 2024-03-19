@@ -5,3 +5,7 @@
 5 - SELECT countrycode, COUNT(language) FROM countrylanguage GROUP BY countrycode ORDER BY countrycode LIMIT 10;
 6 - select countrycode Code, group_concat(language separator ', ') Language from countrylanguage group by code limit 20;
 7 - select countrycode Code, group_concat(language separator ', ') Language from countrylanguage where isofficial = 'T' group by code limit 20;
+8 - select CountryCode, count(IsOfficial) as OL from CountryLanguage where Isofficial='T' group by CountryCode having OL>=2;
+9 - select distinct(region) from Country;
+10 - select Code, name, LifeExpectancy from Country where region='Nordic Countries';
+

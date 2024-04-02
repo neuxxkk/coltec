@@ -11,7 +11,6 @@ public class Main {
         Account account3 = new Account(client3, 3500, 1534, "552-7");
         Account account4 = new Account(client4, 6000, 8723, "244-1");
 
-
         if (account2.transfer(account1, 300)) System.out.printf("\nSuccesfull transfer!\nNew %s balance: $%.2f\nNew %s balance: $%.2f\n", account1.owner,account1.balance,  account2.owner,account2.balance);
         else System.out.printf("\nError during the process\n");
 

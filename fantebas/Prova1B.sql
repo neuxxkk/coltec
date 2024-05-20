@@ -6,11 +6,11 @@ select "Vitor Neuenschwander Mendes Da Silva";
 -- QUESTAO 1.1
 use Prova1B;
 
--- CREATE TABLE categorias( id int auto_increment, categoria varchar(255), primary key(id) );
+CREATE TABLE categorias( id int auto_increment, categoria varchar(255), primary key(id) );
 
--- ALTER TABLE categorias AUTO_INCREMENT=10;
+ALTER TABLE categorias AUTO_INCREMENT=10;
 
--- insert into categorias (categoria) values ("papelaria"),("informatica"),("oficina"),("moveis");
+insert into categorias (categoria) values ("papelaria"),("informatica"),("oficina"),("moveis");
 
 
 -- QUESTAO 1.2

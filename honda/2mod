@@ -1,0 +1,11 @@
+IP - machine identifier 
+NETMASK - dimensiona quantos dispositivos a rede pode ter
+DNS (Domain Name System) - traduz o endereço para IP / www.ufmg.br(F.Q.D.N) --> 150.164.102.160
+Router/Gate - Completa a conexão a partir o IP entregado pelo DNS(Software)
+enp0s3 - Interface de rede
+IPV4 é um IP v4 - 4 grupos de octetos(decimais de até 8 bits/até 255 (0.0.0.0 - 255.255.255.255)) ex: 150.164.102.71
+	71 - máquina conectada sub-rede do coltec
+	102 - máquina servidora do COLTEC sub-rede da ufmg
+	164 - máquina servidora da UFMG sub-rede da nacional
+	150 - máquina servidora nacional
+

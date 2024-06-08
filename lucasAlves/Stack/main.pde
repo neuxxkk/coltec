@@ -7,13 +7,13 @@ float estacaW, estacaH; //Width e Height das torres
 
 int[] swap = new int[2]; //armazena torre origem [0] --> torre destino [1]
 
-Stack<Disco>[] discos = new Stack[3]; //array de estacas com discos dentro
-Stack<Float> estacaX = new Stack<>(); //armazena X das torres
+Stack<Disco>[] torres = new Stack[3]; //array de Stacks representando as 3 torres
+Stack<Float> estacaX = new Stack<>(); //armazena Xpos das torres
 
 void setup(){
   size(600, 600);
   for (int i = 0; i < 3; i++) { //inicializa Stack de Disco()
-    discos[i] = new Stack<>();
+    torres[i] = new Stack<>();
   }
 }
 
@@ -31,19 +31,19 @@ void draw(){
     rect(estacaX.get(i), height, estacaW, - (estacaH)); //Draw it
     
     //Quantos discos tem na estaca = range
-    if (discos[i].empty()==false){range=discos[i].size();}else if(count==1){range=5;}else{range=0;}
+    if (torres[i].empty()==false){range=torres[i].size();}else if(count==1){range=5;}else{range=0;}
     
     for (int j=0; j<range; j++){ //faça range discos
     
     //somente primeit
     if (atualizaStatus==0 && count == 1){
       //gera aleatorio tamanho dos discos
-      float s = random(((((width*0.225)*0.4)*2)+estacaW)/2, (((width*0.225)*0.4)*2)+estacaW);
-      discos[swap[1]].push(new Disco(j, s, swap[1]));
+      int s = int(random(((((width*0.225)*0.4)*2)+estacaW)/2, (((width*0.225)*0.4)*2)+estacaW));//64 - 128
+      torres[swap[1]].push(new Disco(j, s, swap[1]));
     }
       
-      if (discos[i].empty()==false){
-          discos[i].get(j).drawDisco(); //desenha discos
+      if (torres[i].empty()==false){
+          torres[i].get(j).drawDisco(); //desenha discos
       }
     }
   }
@@ -53,18 +53,21 @@ void mouseClicked(){
 
   for (int i=0; i<3; i++){
     if ((mouseX>=estacaX.get(i) && mouseX <=estacaX.get(i)+estacaW) && (mouseY>=(height-estacaH))){
+      
+      if(torres[i].empty()==false){print("\n"+torres[i].peek().size);}
+      
        if (atualizaStatus==1){
          atualizaStatus = 0;
          swap[1] = i;
          
-         if (discos[swap[1]].empty() == false && discos[swap[0]].empty()==false){
-           if (discos[swap[0]].peek().size <= discos[swap[1]].peek().size){ //Se ultimo elemento da pilha origem for menor que ultimo da pilha destino
-             discos[swap[1]].push(new Disco(discos[swap[1]].size(), discos[swap[0]].peek().size, swap[1])); //adiciona no destino
-             discos[swap[0]].pop();//remove da pilha origem
+         if (torres[swap[1]].empty() == false && torres[swap[0]].empty()==false){
+           if (torres[swap[0]].peek().size <= torres[swap[1]].peek().size){ //Se ultimo elemento da pilha origem for menor que ultimo da pilha destino
+             torres[swap[1]].push(new Disco(torres[swap[1]].size(), torres[swap[0]].peek().size, swap[1])); //adiciona no destino
+             torres[swap[0]].pop();//remove da pilha origem
            }
-         }else if(discos[swap[0]].empty()==false){
-               discos[swap[1]].push(new Disco(0, discos[swap[0]].peek().size, swap[1]));//adiciona no destino
-               discos[swap[0]].pop();  //remove da pilha origem
+         }else if(torres[swap[0]].empty()==false){
+               torres[swap[1]].push(new Disco(0, torres[swap[0]].peek().size, swap[1]));//adiciona no destino
+               torres[swap[0]].pop();  //remove da pilha origem
          }
          }else{
             atualizaStatus = 1;

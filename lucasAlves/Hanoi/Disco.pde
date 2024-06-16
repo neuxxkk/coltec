@@ -7,12 +7,12 @@ public class Disco{
     this.size = size;
     this.estaca = estaca;
     this.x = estacaX.get(estaca)-(size/2);
-    this.y = height - (index*0.1*height);
+    this.y = height - (index*0.05*height);
 
   } 
   
   void drawDisco(){
     fill(100);
-    rect(x, y, size+estacaW, -0.1*width);
+    rect(x, y, size+estacaW, -0.05*width);
   }
 }

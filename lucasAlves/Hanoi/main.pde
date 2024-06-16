@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.LinkedList;
 
 int count=0; //conta ciclo para primeira inicialização
 int range = 0; //quantos discos torre possui
@@ -9,17 +10,19 @@ int[] swap = new int[2]; //armazena torre origem [0] --> torre destino [1]
 
 Stack<Disco>[] torres = new Stack[3]; //array de Stacks representando as 3 torres
 Stack<Float> estacaX = new Stack<>(); //armazena Xpos das torres
+LinkedList<Integer> sizes = new LinkedList<Integer>(); //armazena os 5 possíveis tamanhos do disco
 
 void setup(){
   size(600, 600);
   for (int i = 0; i < 3; i++) { //inicializa Stack de Disco()
     torres[i] = new Stack<>();
+    for (int j = 0; j<2; j++) sizes.add((1+i)*(j+i));
   }
 }
 
 void draw(){
   background(220);
-  estacaW=width/(width*0.05);
+  estacaW=width/(width*0.1);
   estacaH=height*0.8;
   
   for (int i=0; i<3; i++){ //para cada estaca
@@ -38,7 +41,10 @@ void draw(){
     //somente primeit
     if (atualizaStatus==0 && count == 1){
       //gera aleatorio tamanho dos discos
-      int s = int(random(((((width*0.225)*0.4)*2)+estacaW)/2, (((width*0.225)*0.4)*2)+estacaW));//64 - 128
+      float base_size = width*0.0255555;
+      int d = int(random(sizes.size()));
+      float s = base_size + sizes.get(d) * base_size;//64 - 128
+      sizes.remove(sizes.indexOf(sizes.get(d)));
       torres[swap[1]].push(new Disco(j, s, swap[1]));
     }
       

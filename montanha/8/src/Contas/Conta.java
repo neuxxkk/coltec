@@ -11,8 +11,7 @@ public abstract class Conta implements ITaxas{
     protected Cliente dono;
     protected double saldo;
     protected double limiteMax, limiteMin;
-    protected Operacao[] operacoes;
-    protected int proximaOperacao;
+    protected List<Operacao> operacoes;
     protected static int totalContas = 0;
 
     Conta(int numero, Cliente dono, double saldo, double limiteMin, double limiteMax) {
@@ -20,23 +19,14 @@ public abstract class Conta implements ITaxas{
         this.dono = dono;
         setLimite(limiteMin, limiteMax);
         setSaldo(saldo);
-        this.operacoes = new Operacao[10];
-        this.proximaOperacao = 0;
+        this.operacoes = new LinkedList<Operacao>();
         Conta.totalContas++;
     }
-
-    protected void redimensionarOperacoes() {
-        if (operacoes.length == proximaOperacao) {
-            operacoes = Arrays.copyOf(operacoes, operacoes.length * 2);
-        }
-    }
-
+    
     public boolean sacar(double valor) {
         if (saldo-valor >= limiteMin && valor > 0) {
-            operacoes[proximaOperacao] = new OperacaoSaque(valor);
-            saldo -= valor + operacoes[proximaOperacao].calculaTaxas();
-            proximaOperacao++;
-            redimensionarOperacoes();
+            operacoes.add(new OperacaoSaque(valor));
+            saldo -= valor + operacoes.getLast().calculaTaxas();
             return true;
         }
         return false;
@@ -45,21 +35,22 @@ public abstract class Conta implements ITaxas{
     public boolean depositar(double valor) {
         if (saldo+valor <= limiteMax && valor > 0){
             saldo += valor;
-            operacoes[proximaOperacao] = new OperacaoDeposito(valor);
-            proximaOperacao++;
-            redimensionarOperacoes();
+            operacoes.add(new OperacaoDeposito(valor));
             return true;
         }
         return false;
     }
 
     public boolean transferir(Conta destino, double valor) {
-        if (sacar(valor))
+        if (sacar(valor)) 
             return destino.depositar(valor);
         return false;
     }
 
-    public void imprimirExtratoConta() {
+    @SuppressWarnings("unchecked")
+    public void imprimirExtratoConta(int order) {
+        if (order == 1) Collections.sort(operacoes);
+        else operacoes.sort((a, b)->a.getData().compareTo(b.getData()));
         System.out.println("\n============= Extrato Conta " + numero + " ==============");
         for(Operacao atual : operacoes) {
             if (atual != null) {
@@ -97,6 +88,7 @@ public abstract class Conta implements ITaxas{
     public boolean equals(Object conta) {
         return this.numero==((Conta) conta).numero; //converte Object conta to Conta conta
     }
+
 
     //Encapsulation
     public int getNumero() {return numero;}

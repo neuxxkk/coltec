@@ -1,6 +1,6 @@
 package ITaxas;
 
 @FunctionalInterface
-public interface ITaxas {
+public interface ITaxas { 
     double calculaTaxas();
 }

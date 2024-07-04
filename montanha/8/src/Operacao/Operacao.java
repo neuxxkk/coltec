@@ -2,24 +2,32 @@ package Operacao;
 
 import java.util.*;
 import ITaxas.*;
+import Main.*;
 
-public abstract class Operacao implements ITaxas{
+@SuppressWarnings("rawtypes")
+public abstract class Operacao implements ITaxas, Comparable{
 
     private Date data;
     protected char tipo;
     protected double valor;
     private static int totalOperacoes = 0;
 
-    Operacao(char tipo, double valor) {
+    public Operacao(char tipo, double valor) {
         this.tipo = tipo;
         this.valor = valor;
         data = new Date();
+        if (Main.realTime) data.setTime((totalOperacoes * data.getTime()/5) + (new Random().nextLong(data.getTime()))/8);
         Operacao.totalOperacoes++;
     }
 
     @Override //Object()
     public String toString() {
         return String.format("%s\t%s\t%s", this.data,  this.tipo,  this.valor);
+    }
+
+    @Override
+    public int compareTo(Object obj){
+        return tipo - ((Operacao) obj).tipo;
     }
 
     //Encapsulation

@@ -2,6 +2,7 @@ class Map {
   int chunkSize, tileSize;
   float offsetX, offsetY;
   HashMap<String, Chunk> chunks;
+  int boatY, boatX;
 
   Map(int chunkSize, int tileSize) {
     this.chunkSize = chunkSize;
@@ -10,7 +11,7 @@ class Map {
     this.offsetY = 0;
     this.chunks = new HashMap<String, Chunk>();
   }
-
+  
   void display() {
     //noStroke();
     int startX = floor(-offsetX / chunkSize) - 1;

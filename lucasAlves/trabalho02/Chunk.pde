@@ -1,19 +1,23 @@
 class Chunk {
   int chunkX, chunkY;
   int[][] tiles;
+  int playerTileX;
+  int playerTileY;
 
   Chunk(int x, int y) {
     chunkX = x;
     chunkY = y;
     tiles = new int[chunkSize / tileSize][chunkSize / tileSize];
     generateChunk();
+    playerTileX = (s%chunkSize / tileSize);
+    playerTileY = (s%chunkSize / tileSize);
   }
 
   void generateChunk() {
     for (int x = 0; x < chunkSize / tileSize; x++) {
       for (int y = 0; y < chunkSize / tileSize; y++) {
         float noise = noise((chunkX * chunkSize + x * tileSize) * 0.01, (chunkY * chunkSize + y * tileSize) * 0.01);
-        if (noise < 0.3) {
+        if (noise < 0.3 && !(x==playerTileX && y==playerTileY)) {
           tiles[x][y] = 0; // água
         } else if (noise < 0.6) {
           tiles[x][y] = 1; // grama
@@ -22,11 +26,12 @@ class Chunk {
         }
 
         // Adicionar obstáculos
-        if (random(1) < 0.005) {
+        if (random(1) < 0.005 && !(x==playerTileX && y==playerTileY)) {
           if (tiles[x][y] == 0) tiles[x][y] = 3; // coral
+          else if (random(1)>0.8) tiles[x][y] = 6; // boat
           else if (tiles[x][y] == 1) tiles[x][y] = 4; // pedra
           else if (tiles[x][y] == 2) tiles[x][y] = 5; // cacto
-        }
+        }      
       }
     }
   }
@@ -67,6 +72,10 @@ class Chunk {
             break;
           case 5: // cacto
             fill(0, 128, 0);
+            break;
+          case 6: // boat
+            if(!player.boat) fill(102,51,0);
+            else tiles[x][y] = int(random(1,3));
             break;
         }
 

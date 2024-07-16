@@ -1,4 +1,21 @@
-//class Route{
+class Route{
+  int[][] matrix;
+  
+  public Route(){
+    matrix = new int[85][85];
+  }
+  
+  void getA(){
+    int startX = xP-40, startY = yP-40;
+    int endX = xP+40, endY = yP+40;
+    for (int i=0; i<endX - startX; i++){
+      for (int j=0; j<endY - startY; j++){
+        if (i!=j){
+          matrix[i][j] = map.getTileValue(startX + i, startY + j);
+        }       
+      } // start: superior esquerdo 
+    } 
+  }
 //    void dijstraka(int origem, int destino){
 //    int [] dist = new int[numVertices];
 //    int [] anterior = new int[numVertices];
@@ -42,4 +59,4 @@
 //  Collections.reverse(ordem);
 //  this.desenhar(ordem);
 //}
-//}
+}

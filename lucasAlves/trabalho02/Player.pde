@@ -7,24 +7,28 @@ class Player{
   boolean boat;
   
   public Player(){
-    this.posX = map.screenPosX(x);
-    this.posY = map.screenPosY(y);
     allowedTiles.add(1);
     allowedTiles.add(2);
+    allowedTiles.add(6);
+    this.posX = xP;
+    this.posY = yP;
+
     boat = false;
   }
   
   void atualizaPlayer(){
-    this.posY = map.screenPosY(y);
-    this.posX = map.screenPosX(x);
     this.drawPlayer();
-    if (this.boat) allowedTiles.add(0);
-    else if(allowedTiles.contains(0)) allowedTiles.remove(0);
+    if (map.getTileValue(posX, posY) == 6){
+      boat = true;
+      allowedTiles.add(0);
+    }
   }
   
   void drawPlayer(){
+    this.posX = xP;
+    this.posY = yP;
     fill(255,0,0);
-    ellipse(posX, posY, 10, 10);
+    ellipse(map.screenPosX(posX), map.screenPosY(posY), 10, 10);
   }
   
 }

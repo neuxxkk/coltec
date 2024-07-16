@@ -6,7 +6,7 @@ Map map;
 Player player;
 
 int s = 900;
-int x = s, y = s;
+int xP = s, yP = s;
 
 void setup() {
   size(800, 800);
@@ -29,10 +29,10 @@ void mouseDragged() {
 
 void mouseReleased() {
   if(!dragging){
-    int x = map.gridPosX(mouseX);
-    int y = map.gridPosY(mouseY);
-    int v = map.getTileValue(x, y);
-    println("valor: " + x + ", " + y  );
+    int xM = map.gridPosX(mouseX);
+    int yM = map.gridPosY(mouseY);
+    int v = map.getTileValue(xM, yM);
+    println("valor: " + xM + ", " + yM);
     switch(v) {
           case 0: // água
             println("água");
@@ -52,15 +52,18 @@ void mouseReleased() {
           case 5: // cacto
             println("cacto");
             break;
+          case 6: // boat
+            println("boat");
+            break;
     }
   }
   else dragging = false;
 }
 
 void keyPressed() {
-  if (key == 'c' || key == 'C') map.reset(s,s);
-  if ((key == 'w' || key == 'W') && player.allowedTiles.contains(map.getTileValue(x, y-1)) ) y--;
-  if ((key == 's' || key == 'S') && player.allowedTiles.contains(map.getTileValue(x, y+1)) ) y++;
-  if ((key == 'a' || key == 'A') && player.allowedTiles.contains(map.getTileValue(x-1, y)) ) x--;
-  if ((key == 'd' || key == 'D') && player.allowedTiles.contains(map.getTileValue(x+1, y)) ) x++;
+  if (key == 'c' || key == 'C') map.reset(xP,yP);
+  if ((key == 'w' || key == 'W') && player.allowedTiles.contains(map.getTileValue(xP, yP-1)) ) yP--;
+  if ((key == 's' || key == 'S') && player.allowedTiles.contains(map.getTileValue(xP, yP+1)) ) yP++;
+  if ((key == 'a' || key == 'A') && player.allowedTiles.contains(map.getTileValue(xP-1, yP)) ) xP--;
+  if ((key == 'd' || key == 'D') && player.allowedTiles.contains(map.getTileValue(xP+1, yP)) ) xP++;
 }

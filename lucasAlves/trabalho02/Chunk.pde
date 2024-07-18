@@ -3,21 +3,27 @@ class Chunk {
   int[][] tiles;
   int playerTileX;
   int playerTileY;
+  int boatTileX;
+  int boatTileY;
 
   Chunk(int x, int y) {
     chunkX = x;
     chunkY = y;
     tiles = new int[chunkSize / tileSize][chunkSize / tileSize];
+    boatTileX = (map.chunks.size() == map.boatChunk)? int(random(4)) : -1;
+    boatTileY = (map.chunks.size() == map.boatChunk)? int(random(4)) : -1; 
+    playerTileX = (map.chunks.size() == map.playerChunk)? 0 : -1;
+    playerTileY = (map.chunks.size() == map.playerChunk)? 0 : -1;
     generateChunk();
-    playerTileX = (s%chunkSize / tileSize);
-    playerTileY = (s%chunkSize / tileSize);
   }
 
   void generateChunk() {
     for (int x = 0; x < chunkSize / tileSize; x++) {
       for (int y = 0; y < chunkSize / tileSize; y++) {
         float noise = noise((chunkX * chunkSize + x * tileSize) * 0.01, (chunkY * chunkSize + y * tileSize) * 0.01);
-        if (noise < 0.3 && !(x==playerTileX && y==playerTileY)) {
+        if (x == boatTileX && y == boatTileY){
+          tiles[x][y] = 6; // boat
+        } else if (noise < 0.3 && map.chunks.size() != map.playerChunk && map.chunks.size() != map.boatChunk) {
           tiles[x][y] = 0; // água
         } else if (noise < 0.6) {
           tiles[x][y] = 1; // grama
@@ -26,9 +32,8 @@ class Chunk {
         }
 
         // Adicionar obstáculos
-        if (random(1) < 0.005 && !(x==playerTileX && y==playerTileY)) {
+        if (random(1) < 0.005 && map.chunks.size()!=map.playerChunk && map.chunks.size()!=map.boatChunk) {
           if (tiles[x][y] == 0) tiles[x][y] = 3; // coral
-          else if (random(1)>0.8) tiles[x][y] = 6; // boat
           else if (tiles[x][y] == 1) tiles[x][y] = 4; // pedra
           else if (tiles[x][y] == 2) tiles[x][y] = 5; // cacto
         }      
@@ -74,8 +79,11 @@ class Chunk {
             fill(0, 128, 0);
             break;
           case 6: // boat
-            if(!player.boat) fill(102,51,0);
+            if(!player.boat) fill(151,51,0);
             else tiles[x][y] = int(random(1,3));
+            break;
+          case 9:// cacto
+            fill(0);
             break;
         }
 

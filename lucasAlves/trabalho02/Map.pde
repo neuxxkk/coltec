@@ -3,6 +3,7 @@ class Map {
   float offsetX, offsetY;
   HashMap<String, Chunk> chunks;
   int boatY, boatX;
+  int boatChunk = 0, playerChunk;
 
   Map(int chunkSize, int tileSize) {
     this.chunkSize = chunkSize;
@@ -10,6 +11,8 @@ class Map {
     this.offsetX = 0;
     this.offsetY = 0;
     this.chunks = new HashMap<String, Chunk>();
+    playerChunk = floor((chunkSize/tileSize) * ((chunkSize*0.1)+1));
+    while((boatChunk % 10 == 8|| boatChunk % 10 == 9||boatChunk % 10 == 1||boatChunk % 10 == 0)) boatChunk = int(random(12, 88));
   }
   
   void display() {
@@ -23,9 +26,11 @@ class Map {
       for (int y = startY; y < endY; y++) {
         String key = x + "," + y;
         if (!chunks.containsKey(key)) {
-          chunks.put(key, new Chunk(x, y));
+          chunks.put(key, new Chunk(x, y));          
         }
-        chunks.get(key).display(offsetX, offsetY);
+        
+        //if(chunks.size() == playerChunk) for (int r=0;r<5;r++)for (int t=0;t<5;t++)chunks.get(key).tiles[r][t] = 9; //chunk rastreator
+        chunks.get(key).display(offsetX, offsetY);  
       }
     }
   }

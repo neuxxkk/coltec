@@ -1,17 +1,20 @@
 int chunkSize = 100;
 int tileSize = 20;
 boolean dragging = false;
+boolean onRoute = false;
 
 Map map;
 Player player;
+Route route;
 
-int s = 900;
+int s = 1000;
 int xP = s, yP = s;
 
 void setup() {
   size(800, 800);
   map = new Map(chunkSize, tileSize);
   player = new Player();
+  route = new Route();
   map.reset(s, s);
 }
 
@@ -31,6 +34,9 @@ void mouseReleased() {
   if(!dragging){
     int xM = map.gridPosX(mouseX);
     int yM = map.gridPosY(mouseY);
+    
+    if (onRoute) route.getXY(xM, yM);
+    
     int v = map.getTileValue(xM, yM);
     println("valor: " + xM + ", " + yM);
     switch(v) {
@@ -61,6 +67,16 @@ void mouseReleased() {
 }
 
 void keyPressed() {
+  if (key == 'r'){
+    if (!onRoute){
+      print("OnRoute");
+      route = new Route();
+      onRoute = true;
+    }else{
+      print("OffRoute");
+      onRoute = false;
+    }
+  }
   if (key == 'c' || key == 'C') map.reset(xP,yP);
   if ((key == 'w' || key == 'W') && player.allowedTiles.contains(map.getTileValue(xP, yP-1)) ) yP--;
   if ((key == 's' || key == 'S') && player.allowedTiles.contains(map.getTileValue(xP, yP+1)) ) yP++;

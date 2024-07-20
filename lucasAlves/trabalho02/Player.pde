@@ -27,8 +27,8 @@ class Player{
   void drawPlayer(){
     this.posX = xP;
     this.posY = yP;
-    fill(255,0,0);
-    ellipse(map.screenPosX(posX), map.screenPosY(posY), 10, 10);
+    fill(150,80,150);
+    ellipse(map.screenPosX(posX), map.screenPosY(posY), 12, 12);
   }
   
 }

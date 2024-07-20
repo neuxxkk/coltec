@@ -21,6 +21,7 @@ void setup() {
 void draw() {
   background(0);
   map.display();
+  route.drawRoute();   
   player.atualizaPlayer();
 }
 
@@ -38,7 +39,7 @@ void mouseReleased() {
     if (onRoute) route.getXY(xM, yM);
     
     int v = map.getTileValue(xM, yM);
-    println("valor: " + xM + ", " + yM);
+    println("valor: " + xM + ", " + yM + ", " + route.getVertice(xM, yM));
     switch(v) {
           case 0: // água
             println("água");

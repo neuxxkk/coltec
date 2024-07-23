@@ -1,8 +1,6 @@
 class Chunk {
   int chunkX, chunkY;
   int[][] tiles;
-  int playerTileX;
-  int playerTileY;
   int boatTileX;
   int boatTileY;
 
@@ -12,8 +10,6 @@ class Chunk {
     tiles = new int[chunkSize / tileSize][chunkSize / tileSize];
     boatTileX = (map.chunks.size() == map.boatChunk)? int(random(4)) : -1;
     boatTileY = (map.chunks.size() == map.boatChunk)? int(random(4)) : -1; 
-    playerTileX = (map.chunks.size() == map.playerChunk)? 0 : -1;
-    playerTileY = (map.chunks.size() == map.playerChunk)? 0 : -1;
     generateChunk();
   }
 

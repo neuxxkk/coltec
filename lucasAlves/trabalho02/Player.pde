@@ -47,7 +47,7 @@ class Player{
   
   void display(){
     fill(255,10,10);
-    ellipse(map.screenPosX(posX) + offsetX, map.screenPosY(posY) + offsetY, 12, 12);
+    ellipse(map.screenPosX(posX) + offsetX, map.screenPosY(posY) + offsetY, tileSize*0.6, tileSize*0.6);
   }
   
   void move(ArrayList <Integer> movs){

@@ -42,20 +42,25 @@ void mouseReleased() {
     else{
       int xM = map.gridPosX(mouseX);
       int yM = map.gridPosY(mouseY);
+      int v = map.getTileValue(xM, yM);
       xT = xM; yT = yM;
-      if (onRoute == 1){
-        player.posX = xM;
-        player.posY = yM;
-        routePos[0][0] = xM;
-        routePos[0][1] = yM; //origin
-        onRoute = 2;
-      }else if(onRoute == 2 || onRoute == 3){
-        routePos[1][0] = xM;
-        routePos[1][1] = yM; //goal
-        onRoute = 3;
+      if (player.allowedTiles.contains(v)){
+        if (onRoute == 1){
+          player.posX = xM;
+          player.posY = yM;
+          routePos[0][0] = xM;
+          routePos[0][1] = yM; //origin
+          onRoute = 2;
+        }else if(onRoute == 2 || onRoute == 3){
+          routePos[1][0] = xM;
+          routePos[1][1] = yM; //goal
+          onRoute = 3;
+        }
+      }else if (onRoute > 0){
+        println("Block not allowed! Try again");
+        onRoute = 0;
       }
     
-      int v = map.getTileValue(xM, yM);
       String block = "";
       println("valor: " + xM + ", " + yM);
       switch(v) {
@@ -89,26 +94,14 @@ void mouseReleased() {
 }
 
 void keyPressed() {
-  
+  if (key == 'r') if (onRoute == 0) onRoute = 1; else if (onRoute > 3) route.off(); else onRoute = 0; //choose route
   if (key == 'g' && onRoute == 3) onRoute = 4; //confirm points
   if (key == '5' && onRoute == 4)  route = new Route(routePos[0], routePos[1], 'd'); //choose algorithm
   if (key == '8' && onRoute == 4)  route = new Route(routePos[0], routePos[1], 'a');
   
-  if (key == 'r'){ //choose route
-    if (onRoute == 0){
-      print("OnRoute");
-      onRoute = 1;
-    }else{
-      print("OffRoute");
-      route.off();
-    }
-  }
   if (key == 'p' || key == 'P') map.reset(player.posX,player.posY); //centralize
+  if (key == 't'){player.posY = yT; player.posX = xT;} //cheat
   
-  if (key == 't'){ //cheat
-    player.posY = yT;
-    player.posX = xT;
-    }
   if ((key == 'w' || key == 'W') && player.allowedTiles.contains(map.getTileValue(player.posX, player.posY-1))) player.move(1);
   if ((key == 's' || key == 'S') && player.allowedTiles.contains(map.getTileValue(player.posX, player.posY+1))) player.move(-1);
   if ((key == 'a' || key == 'A') && player.allowedTiles.contains(map.getTileValue(player.posX-1, player.posY))) player.move(2);

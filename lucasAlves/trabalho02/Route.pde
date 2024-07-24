@@ -13,16 +13,10 @@ class Route{
   }
   
   void traceRoute(int[] origin, int[] destiny, char m){
-    if (player.allowedTiles.contains(map.getTileValue(origin[0], origin[1])) && player.allowedTiles.contains(map.getTileValue(destiny[0], destiny[1]))){
-      setAdjMatrix(origin, destiny);
-      generateAdjMatrix();
-      if (m == 'a') aStar();
-      if (m == 'd') dijstraka();
-    }else{
-      println("Block not allowed! Try again");
-      println("OffRoute");
-      onRoute = 0;      
-    }
+    setAdjMatrix(origin, destiny);
+    generateAdjMatrix();
+    if (m == 'a') aStar();
+    if (m == 'd') dijstraka();
   }
   
   int getVertice(int gridX, int gridY){
@@ -155,7 +149,7 @@ class Route{
   void display(){
     fill(255, 100, 100);
     for (int i : path){
-      if (i!=destinyV) ellipse(map.screenPosX(getGridX(i)), map.screenPosY(getGridY(i)), tileSize/4, tileSize/4);
+      if (i!=destinyV) ellipse(map.screenPosX(getGridX(i)), map.screenPosY(getGridY(i)), tileSize/3, tileSize/3);
     }
   }
   
@@ -177,6 +171,7 @@ class Route{
     onRoute = 0;
     routePos = new int[2][2];
     route = null;
+    println("OffRoute");
   }
   
 }

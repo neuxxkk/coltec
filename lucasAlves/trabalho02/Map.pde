@@ -12,7 +12,7 @@ class Map {
     this.offsetY = 0;
     this.chunks = new HashMap<String, Chunk>();
     playerChunk = (width / chunkSize * 7) - 1;
-    while((boatChunk % 10 == 8|| boatChunk % 10 == 9||boatChunk % 10 == 1||boatChunk % 10 == 0)) boatChunk = int(random(12, 88))-1;
+    while((boatChunk % 10 != 3 && boatChunk % 10 != 4 && boatChunk % 10 != 5 && boatChunk % 10 != 6 && boatChunk % 10 != 7)) boatChunk = int(random(playerChunk - (chunkSize/tileSize*5), playerChunk + (chunkSize/tileSize*5)))-1;
   }
   
   void display() {

@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 class Player{
   int moving;
   int posX, posY; //grid
@@ -19,14 +16,13 @@ class Player{
     this.screenPosX = map.screenPosX(x);
     this.screenPosY = map.screenPosX(y);
     boat = false;
-    atualizaPlayer();
+    update();
   }
   
-  void atualizaPlayer(){
-    this.drawPlayer();
+  void update(){
+    this.display();
     
-    if (!movs.isEmpty()) movePlayer();
-    if (moving !=0) move(moving);
+    if (!movs.isEmpty() || moving != 0) movePlayer();
     
     if (map.renderized)
       switch (map.getTileValue(posX, posY)){ //breca a verificação de chunkPlayer
@@ -49,22 +45,25 @@ class Player{
       }
     }
   
-  void drawPlayer(){
+  void display(){
     fill(255,10,10);
     ellipse(map.screenPosX(posX) + offsetX, map.screenPosY(posY) + offsetY, 12, 12);
   }
   
   void move(ArrayList <Integer> movs){
     this.movs = movs;
-    moving = 0;
   }
   
-  void movePlayer(){ 
+  void move(int movs){
+    if (moving == 0) this.movs = new ArrayList<Integer>(Arrays.asList(movs));
+  }
+  
+  void movePlayer(){   
     if (moving == 0 && !movs.isEmpty()){
-      moving = movs.get(0)*-1;
+      moving = movs.get(0);
       movs.remove(0);
     }
-    
+
     float off = (vel/frameRate) * tileSize * 2;
     switch (moving){
       case 1: //up
@@ -96,39 +95,4 @@ class Player{
     }
     
   }
-  
-  void move(int direction){ 
-    if (moving == 0) moving = direction;
-    float off = (vel/frameRate) * tileSize * 2;
-    switch (direction){
-      case 1: //up
-        offsetY -= off;
-        break;
-      case -1: //down
-        offsetY += off;
-        break;
-      case 2: //left
-        offsetX -= off;
-        break;
-      case -2: //right
-        offsetX += off;
-        break;
-    }
-    
-    if (abs(offsetY) >= tileSize){
-      int newY = posY += offsetY/abs(offsetY);
-      if(allowedTiles.contains(map.getTileValue(posX, newY))) posY = newY;
-      moving = 0;
-      offsetY = 0;
-    }
-    
-    if (abs(offsetX) >= tileSize){
-      int newX = posX += offsetX/abs(offsetX);
-      if(allowedTiles.contains(map.getTileValue(newX, posY))) posX = newX;
-      moving = 0;
-      offsetX = 0;
-    }
-    
-  }
-  
 }

@@ -4,8 +4,8 @@ int chunkSize = 100;
 int tileSize = 20;
 boolean dragging = false;
 int onRoute = 0; // Route status, 0 - off, 1 - ON, 2 - haveOrigin, 3 - haveDestiny, 4 - chose Dijstraka or A*, 5 - execute
-int [][] routePos = new int[2][2];
-int startPos = chunkSize * 10;
+int [][] routePos = new int[2][2]; //grid
+int startPos = 1000;
 int xT, yT; //cheat
 
 Map map;
@@ -25,8 +25,8 @@ void draw() {
   background(0);
   map.display();
   if (route != null) route.display();   
-  player.update();
   trigger.display();
+  player.update();
 }
 
 void mouseDragged() {

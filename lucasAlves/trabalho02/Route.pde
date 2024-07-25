@@ -1,15 +1,32 @@
 class Route{
-  int lines = height/tileSize + 10, cols = width/tileSize + 10; //quantidade de blocos em uma linha/coluna + 1
-  int startX = map.gridPosX(width/2) - cols/2;
-  int startY = map.gridPosY(height/2) - lines/2;
-  int verticesNum = lines*cols; //quantidade de blocos presentes na tela
+  int lines, cols;
+  int startX, startY;
+  int verticesNum; //quantidade de blocos presentes na tela
   float[][] adjMatrix;
   int destinyV, originV;
   ArrayList<Integer> path;
   
   public Route(int[] origin, int[] destiny, char m){
     this.path = new ArrayList<Integer>();
+    setLimits();
     traceRoute(origin, destiny, m);
+  }
+  
+  void setLimits(){
+    int fromX = routePos[0][0], toX = routePos[1][0];
+    int fromY = routePos[0][1], toY = routePos[1][1];
+    int minRange = chunkSize/tileSize;
+    
+    this.startX = (fromX <= toX) ? fromX - minRange : toX - minRange;
+    int lastX = (fromX <= toX) ? toX + minRange : fromX + minRange;
+    
+    this.startY = (fromY <= toY) ? fromY - minRange : toY - minRange;
+    int lastY = (fromY <= toY) ? toY + minRange : fromY + minRange;
+    
+    this.cols = lastX - this.startX;
+    this.lines = lastY - this.startY;
+    this.verticesNum = this.lines * this.cols;
+    println(startX, startY, cols, lines);
   }
   
   void traceRoute(int[] origin, int[] destiny, char m){
@@ -147,7 +164,7 @@ class Route{
     }
 
   void display(){
-    fill(255, 100, 100);
+    fill(255, 100, 100, 230);
     for (int i : path){
       if (i!=destinyV) ellipse(map.screenPosX(getGridX(i)), map.screenPosY(getGridY(i)), tileSize/3, tileSize/3);
     }
@@ -168,6 +185,7 @@ class Route{
   
     
   void off(){
+    player.stop();
     onRoute = 0;
     routePos = new int[2][2];
     route = null;

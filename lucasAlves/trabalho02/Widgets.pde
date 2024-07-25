@@ -158,6 +158,7 @@ public class Trigger { //<>//
     }
     
     void drawX(int screenX, int screenY){
+      fill(255,0,0);
       float xCenter = screenX;
       float yCenter = screenY;
       float rectWidth = tileSize/3;

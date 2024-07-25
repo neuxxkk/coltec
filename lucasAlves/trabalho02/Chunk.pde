@@ -14,7 +14,6 @@ class Chunk {
   }
 
   void generateChunk() {
-    println(map.chunks.size());
     for (int x = 0; x < chunkSize / tileSize; x++) {
       for (int y = 0; y < chunkSize / tileSize; y++) {
         float noise = noise((chunkX * chunkSize + x * tileSize) * 0.01, (chunkY * chunkSize + y * tileSize) * 0.01);

@@ -22,7 +22,7 @@ class Player{
   void update(){
     this.display();
     
-    if (!movs.isEmpty() || moving != 0) movePlayer();
+    if (movs != null || moving != 0) movePlayer();
     
     if (map.renderized)
       switch (map.getTileValue(posX, posY)){ //breca a verificação de chunkPlayer
@@ -95,4 +95,11 @@ class Player{
     }
     
   }
+  
+  void stop(){
+    this.offsetX = (offsetX != 0) ? tileSize / (offsetX/abs(offsetX)): 0;
+    this.offsetY = (offsetY != 0) ? tileSize / (offsetY/abs(offsetY)): 0;
+    this.movs = null;
+  }
+  
 }

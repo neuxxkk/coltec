@@ -1,23 +1,25 @@
 import java.util.*;
 
-int chunkSize = 100;
-int tileSize = 20;
+final int chunkSize = 100;
+final int tileSize = 20;
+final int startPos = 1000;
+
 boolean dragging = false;
-int onRoute = 0; // Route status, 0 - off, 1 - ON, 2 - haveOrigin, 3 - haveDestiny, 4 - chose Dijstraka or A*, 5 - execute
-int [][] routePos = new int[2][2]; //grid
-int startPos = 1000;
 int xT, yT; //cheat
 
 Map map;
 Trigger trigger;
 Player player;
 Route route;
+Game game;
 
 void setup() {
   size(800, 800);
   map = new Map(chunkSize, tileSize);
-  trigger = new Trigger();
   player = new Player(startPos,startPos);
+  route = new Route();
+  trigger = new Trigger();
+  game = new Game();
   map.reset(startPos, startPos);
 }
 
@@ -26,13 +28,13 @@ void draw() {
   map.display();
   if (route != null) route.display();   
   trigger.display();
+  game.display();
   player.update();
 }
 
 void mouseDragged() {
     dragging = true;
     map.drag(mouseX - pmouseX, mouseY - pmouseY);
-    
 }
 
 void mouseReleased() {
@@ -45,23 +47,14 @@ void mouseReleased() {
       int v = map.getTileValue(xM, yM);
       xT = xM; yT = yM;
       if (player.allowedTiles.contains(v)){
-        if (onRoute == 1){
-          player.posX = xM;
-          player.posY = yM;
-          routePos[0][0] = xM;
-          routePos[0][1] = yM; //origin
-          onRoute = 2;
-        }else if(onRoute == 2 || onRoute == 3){
-          routePos[1][0] = xM;
-          routePos[1][1] = yM; //goal
-          onRoute = 3;
-        }
-      }else if (onRoute > 0){
+        route.getCoord(xM, yM);
+        game.addToRoute(xM,yM);
+      }else if (route.onRoute > 0){
         println("Block not allowed! Try again");
-        onRoute = 0;
+        route.onRoute = 0;
       }
     
-      String block = "";
+      String block = null;
       println("valor: " + xM + ", " + yM);
       switch(v) {
             case 0: // água
@@ -86,18 +79,18 @@ void mouseReleased() {
               block = "boat";
               break;
       }
-      if (onRoute == 2) trigger.origB = block;
-      else if (onRoute == 3) trigger.destB = block;
+      if (route.onRoute == 2) trigger.origB = block;
+      else if (route.onRoute == 3) trigger.destB = block;
       println(block);
     }
   }else dragging = false;
 }
 
 void keyPressed() {
-  if (key == 'r') if (onRoute == 0) onRoute = 1; else if (onRoute > 3) route.off(); else onRoute = 0; //choose route
-  if (key == 'g' && onRoute == 3) onRoute = 4; //confirm points
-  if (key == '5' && onRoute == 4)  route = new Route(routePos[0], routePos[1], 'd'); //choose algorithm
-  if (key == '8' && onRoute == 4)  route = new Route(routePos[0], routePos[1], 'a');
+  if (key == 'r') if (route.onRoute == 0) route.onRoute = 1; else if (route.onRoute > 3) route.off(); else route.onRoute = 0; //choose route
+  if (key == 'g' && route.onRoute == 3) route.onRoute = 4; //confirm points
+  if (key == '5' && route.onRoute == 4)  route.traceRoute('d'); //choose algorithm
+  if (key == '8' && route.onRoute == 4)  route.traceRoute('d');
   
   if (key == 'p' || key == 'P') map.reset(player.posX,player.posY); //centralize
   if (key == 't'){player.posY = yT; player.posX = xT;} //cheat
@@ -106,4 +99,6 @@ void keyPressed() {
   if ((key == 's' || key == 'S') && player.allowedTiles.contains(map.getTileValue(player.posX, player.posY+1))) player.move(-1);
   if ((key == 'a' || key == 'A') && player.allowedTiles.contains(map.getTileValue(player.posX-1, player.posY))) player.move(2);
   if ((key == 'd' || key == 'D') && player.allowedTiles.contains(map.getTileValue(player.posX+1, player.posY))) player.move(-2);
+  
+  if (key == 'y' && game.reading) game.done();
 }

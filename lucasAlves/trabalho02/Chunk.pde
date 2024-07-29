@@ -1,15 +1,21 @@
 class Chunk {
   int chunkX, chunkY;
+  String key;
   int[][] tiles;
-  int boatTileX;
-  int boatTileY;
+  boolean playerChunk, boatChunk;
+  int boatTileX, boatTileY;
 
   Chunk(int x, int y) {
     chunkX = x;
     chunkY = y;
+    key = x + "," + y;
     tiles = new int[chunkSize / tileSize][chunkSize / tileSize];
-    boatTileX = (map.chunks.size() == map.boatChunk)? int(random(4)) : -1;
-    boatTileY = (map.chunks.size() == map.boatChunk)? int(random(4)) : -1; 
+    
+    playerChunk = (key.equals(map.playerKey)) ? true : false;
+    boatChunk = (key.equals(map.boatKey)) ? true: false;
+    boatTileX = (boatChunk)? int(random(chunkSize/tileSize)) : -1;
+    boatTileY = (boatChunk)? int(random(chunkSize/tileSize)) : -1;
+    
     generateChunk();
   }
 
@@ -19,7 +25,7 @@ class Chunk {
         float noise = noise((chunkX * chunkSize + x * tileSize) * 0.01, (chunkY * chunkSize + y * tileSize) * 0.01);
         if (x == boatTileX && y == boatTileY){
           tiles[x][y] = 6; // boat
-        } else if (noise < 0.3 && map.chunks.size() != map.playerChunk && map.chunks.size() != map.boatChunk) {
+        } else if (noise < 0.3 && !playerChunk && !boatChunk) {
           tiles[x][y] = 0; // água
         } else if (noise < 0.6) {
           tiles[x][y] = 1; // grama
@@ -28,7 +34,7 @@ class Chunk {
         }
 
         // Adicionar obstáculos
-        if (random(1) < 0.005 && map.chunks.size()!=map.playerChunk && map.chunks.size()!=map.boatChunk) {
+        if (random(1) < 0.005 && !playerChunk && !boatChunk) {
           if (tiles[x][y] == 0) tiles[x][y] = 3; // coral
           else if (tiles[x][y] == 1) tiles[x][y] = 4; // pedra
           else if (tiles[x][y] == 2) tiles[x][y] = 5; // cacto

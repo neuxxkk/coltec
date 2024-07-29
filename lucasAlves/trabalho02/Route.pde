@@ -1,22 +1,61 @@
 class Route{
+  int onRoute; // Route status, 0 - off, 1 - ON, 2 - haveOrigin, 3 - haveDestiny, 4 - chose Dijstraka or A*, 5 - execute
   int lines, cols;
+  int fromX, fromY, toX, toY; //Grid
   int startX, startY;
+  int destinyV, originV;
   int verticesNum; //quantidade de blocos presentes na tela
   float[][] adjMatrix;
-  int destinyV, originV;
   ArrayList<Integer> path;
+  float cost, time;
+  char alg;
   
-  public Route(int[] origin, int[] destiny, char m){
+  public Route(){
     this.path = new ArrayList<Integer>();
+    this.onRoute = 0;
+    this.cost = 0;
+  }
+  
+   void traceRoute(char m){
     setLimits();
-    traceRoute(origin, destiny, m);
+    setAdjMatrix();
+    generateAdjMatrix();
+    this.alg = m;
+    if (alg == 'a') aStar();
+    if (alg == 'd') dijstraka();
+    costCalculator();
+  }
+  
+  Route clone(char c){
+    Route r = new Route();
+    
+    r.fromX = fromX;
+    r.fromY = fromY;
+    r.toX = toX;
+    r.toY = toY;
+    
+    r.traceRoute(c);
+    
+    return r;
+  }
+  
+  void getCoord(int x, int y){
+    if (onRoute == 1){
+      fromX = x;
+      fromY = y;
+      player.posX = x;
+      player.posY = y;
+      onRoute = 2;
+    }else if ( onRoute == 2 || onRoute == 3){
+      toX = x;
+      toY = y;
+      onRoute = 3;
+      //map.reset(int((fromX+toX)/2), int((fromY+toY)/2));
+    }
   }
   
   void setLimits(){
-    int fromX = routePos[0][0], toX = routePos[1][0];
-    int fromY = routePos[0][1], toY = routePos[1][1];
     int minRange = chunkSize/tileSize;
-    
     this.startX = (fromX <= toX) ? fromX - minRange : toX - minRange;
     int lastX = (fromX <= toX) ? toX + minRange : fromX + minRange;
     
@@ -26,14 +65,6 @@ class Route{
     this.cols = lastX - this.startX;
     this.lines = lastY - this.startY;
     this.verticesNum = this.lines * this.cols;
-    println(startX, startY, cols, lines);
-  }
-  
-  void traceRoute(int[] origin, int[] destiny, char m){
-    setAdjMatrix(origin, destiny);
-    generateAdjMatrix();
-    if (m == 'a') aStar();
-    if (m == 'd') dijstraka();
   }
   
   int getVertice(int gridX, int gridY){
@@ -48,10 +79,10 @@ class Route{
     return startY + int(vertice/cols);
   }
   
-  void setAdjMatrix(int[] origin, int[] destiny){
+  void setAdjMatrix(){
     this.adjMatrix = new float[verticesNum][verticesNum];
-    this.originV = getVertice(origin[0], origin[1]);
-    this.destinyV = getVertice(destiny[0], destiny[1]);
+    this.originV = getVertice(fromX, fromY);
+    this.destinyV = getVertice(toX, toY);
   }
   
   void generateAdjMatrix(){    
@@ -67,6 +98,17 @@ class Route{
         }
       }
     }
+  }
+  
+  float costCalculator(){
+    int current, past = originV;
+    for (int i : path){
+      //println(0, i);
+      current = i;
+      this.cost += adjMatrix[current][past];
+      past = i;
+    }
+    return cost;
   }
 
   void dijstraka(){
@@ -155,8 +197,8 @@ class Route{
                     if (tentativedist < dist[neighbor]) {
                         dist[neighbor] = tentativedist;
                         anterior[neighbor] = currentNode;
-                        queue.add(new float[]{tentativedist + sqrt(pow(getGridX(neighbor) - getGridX(destinyV), 2) + pow(getGridY(neighbor) - getGridY(destinyV),2)), neighbor});
                         // euclidian heuristic
+                        queue.add(new float[]{tentativedist + sqrt(pow(getGridX(neighbor) - getGridX(destinyV), 2) + pow(getGridY(neighbor) - getGridY(destinyV),2)), neighbor});
                     }
                 }
             }
@@ -165,14 +207,23 @@ class Route{
 
   void display(){
     fill(255, 100, 100, 230);
+    trigger.drawX(map.screenPosX(toX), map.screenPosY(toY));
+    for (int i : path){
+      if (i!=destinyV) ellipse(map.screenPosX(getGridX(i)), map.screenPosY(getGridY(i)), tileSize/3, tileSize/3);
+    }
+  }
+  
+  void display(color c){
+    fill(c);
+    trigger.drawX(map.screenPosX(toX), map.screenPosY(toY));
     for (int i : path){
       if (i!=destinyV) ellipse(map.screenPosX(getGridX(i)), map.screenPosY(getGridY(i)), tileSize/3, tileSize/3);
     }
   }
   
   void makeWay(){
-      ArrayList<Integer> movs = new ArrayList<>();
-      int m=0;
+    ArrayList<Integer> movs = new ArrayList<>();
+    int m=0;
     for (int i=0; i < path.size(); i++){
       int nowX = getGridX(path.get(i)), nowY = getGridY(path.get(i));
       int lastX = (i > 0) ? getGridX(path.get(i-1)) : -1, lastY = (i > 0) ? getGridY(path.get(i-1)) : 0;
@@ -180,15 +231,16 @@ class Route{
       else if (lastY == nowY) m = (lastX - nowX) * 2;
       if (i > 0) movs.add(m);
     }
+    player.posX = fromX;
+    player.posY = fromY;
     player.move(movs);
   }
   
     
   void off(){
     player.stop();
-    onRoute = 0;
-    routePos = new int[2][2];
-    route = null;
+    route = new Route();
+    game.playerRoute = new Route();  
     println("OffRoute");
   }
   

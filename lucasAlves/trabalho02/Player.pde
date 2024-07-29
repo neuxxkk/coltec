@@ -1,6 +1,8 @@
 class Player{
+  boolean stop;
   int moving;
   int posX, posY; //grid
+  int posTile;
   float screenPosX, screenPosY;
   float vel;
   float offsetX, offsetY;
@@ -13,19 +15,20 @@ class Player{
     allowedTiles.add(6);
     this.posX = x;
     this.posY = y;
+    this.posTile = map.getTileValue(posX, posY);
     this.screenPosX = map.screenPosX(x);
     this.screenPosY = map.screenPosX(y);
     boat = false;
+    stop = false;
     update();
   }
   
   void update(){
     this.display();
-    
-    if (movs != null || moving != 0) movePlayer();
-    
-    if (map.renderized)
-      switch (map.getTileValue(posX, posY)){ //breca a verificação de chunkPlayer
+    posTile = map.getTileValue(posX, posY);
+    if (movs !=null || moving != 0) movePlayer();
+    if (map.renderized && allowedTiles.contains(posTile))
+      switch (posTile){ //breca a verificação de chunkPlayer
         case 0:
           this.vel = 2;
           break;
@@ -52,19 +55,23 @@ class Player{
   
   void move(ArrayList <Integer> movs){
     this.movs = movs;
+    stop = false;
   }
   
   void move(int movs){
-    if (moving == 0) this.movs = new ArrayList<Integer>(Arrays.asList(movs));
+    if (moving == 0){
+      this.movs = new ArrayList<Integer>(Arrays.asList(movs));
+    }
+    stop = false;
   }
   
   void movePlayer(){   
     if (moving == 0 && !movs.isEmpty()){
       moving = movs.get(0);
       movs.remove(0);
-    }
+    }else if (moving == 0 && movs.isEmpty()) stop = true;
 
-    float off = (vel/frameRate) * tileSize * 2;
+    float off = (vel/60) * tileSize * 2;
     switch (moving){
       case 1: //up
         offsetY -= off;
@@ -99,7 +106,7 @@ class Player{
   void stop(){
     this.offsetX = (offsetX != 0) ? tileSize / (offsetX/abs(offsetX)): 0;
     this.offsetY = (offsetY != 0) ? tileSize / (offsetY/abs(offsetY)): 0;
-    this.movs = null;
+    this.movs = new ArrayList<Integer>();
   }
   
 }

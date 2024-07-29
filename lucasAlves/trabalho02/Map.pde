@@ -3,16 +3,20 @@ class Map {
   int chunkSize, tileSize;
   float offsetX, offsetY;
   HashMap<String, Chunk> chunks;
-  int boatChunk = 0, playerChunk;
+  
+  int boatDistance;
+  String playerKey;
+  String boatKey;
 
   Map(int chunkSize, int tileSize) {
+    this.boatDistance = width/chunkSize/2;
+    this.boatKey = ( (startPos / (chunkSize/tileSize) + int(random(-boatDistance,boatDistance))) + "," + (startPos / (chunkSize/tileSize) + int(random(-boatDistance, boatDistance))) );
+    this.playerKey = (startPos / (chunkSize/tileSize)+ "," + startPos / (chunkSize/tileSize));
     this.chunkSize = chunkSize;
     this.tileSize = tileSize;
     this.offsetX = 0;
     this.offsetY = 0;
     this.chunks = new HashMap<String, Chunk>();
-    playerChunk = (width / chunkSize * 7) - 1;
-    while((boatChunk % 10 != 3 && boatChunk % 10 != 4 && boatChunk % 10 != 5 && boatChunk % 10 != 6 && boatChunk % 10 != 7)) boatChunk = int(random(playerChunk - (chunkSize/tileSize*5), playerChunk + (chunkSize/tileSize*5)))-1;
   }
   
   void display() {
@@ -29,7 +33,8 @@ class Map {
           chunks.put(key, new Chunk(x, y));          
         }else renderized = true;
         chunks.get(key).display(offsetX, offsetY);
-        //if(chunks.size() == 56) for (int r=0;r<5;r++)for (int t=0;t<5;t++)chunks.get(key).tiles[r][t] = 9; //chunk rastreator
+        //String myKey = "203,196";
+        //if (renderized && chunks.containsKey(myKey)) Arrays.fill(chunks.get(myKey).tiles, new int[]{9,9,9,9,9}); // chunk rastreator
       }
     }
   }

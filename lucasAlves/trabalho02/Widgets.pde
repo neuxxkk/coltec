@@ -1,117 +1,174 @@
-public class Trigger { //<>//
+public class Trigger { //<>// //<>//
     private String origB, destB;
+    private float startX, largBloco, altBloco;
+    private float startX1 = 10, startY = 10;
+    private float largBloco1 = width/2 - startX1, altBloco1 = 60;
+    private float largBloco2 = 54, altBloco2 = 54;
 
     private void display() {
-      if (onRoute >=3) drawX(map.screenPosX(routePos[1][0]), map.screenPosY(routePos[1][1]));
-        switch (onRoute) {
-            case 3:
-                goBtn();
+      if (route.onRoute > 0){
+        if (route.onRoute >=3) drawX(map.screenPosX(route.toX), map.screenPosY(route.toY));
+          switch (route.onRoute) {
+              case 3:
+                  goBtn();
+                  routeInfo();
+                  break;
+              case 4:
+                  aStarBtn();
+                  dijstrakaBtn();
+                  break;
+              case 5:
+                  stopBtn();
+                  simulateBtn();
+                  break;
+              default:
                 routeInfo();
-                break;
-            case 4:
-                aStarBtn();
-                dijstrakaBtn();
-                break;
-            case 5:
-                stopBtn();
-                simulateBtn();
-                break;
-            default:
-                if (onRoute > 0) {
-                    routeInfo();
-                } else if (onRoute == 0) {
-                    routeBtn();
-                }
+          }
+      }else if (game.stage > 0){
+        switch (game.stage){
+          case 1:
+            goBtn();
+            break;
+          case 2:
+            gameInfo();
+            aStarBtn();
+            dijstrakaBtn();
+            break;
+          case 4:
+            timer(game.playerRoute);
+            break;
+          case 6:
+            timer(game.machineRoute);
+            break;
+          case 7:
+            timer(game.playerRoute);
+            delay(1500);
+            break;
+          case 8:
+            timer(game.machineRoute);
+            delay(1500);
+            break;
+          
         }
+      }else if (route.onRoute == 0 && game.stage == 0) {
+        routeBtn();
+        gameBtn();
+       }
     }
 
     public boolean btnTrigger(int x, int y) {
-        switch (onRoute) {
-            case 0:
-                if (routeBtnV(x, y)) {
-                    println("OnRoute");
-                    onRoute = 1;
-                    return true;
-                }
-                break;
-            case 3:
-                if (goBtnV(x, y)) {
-                    onRoute = 4;
-                    return true;
-                }
-                break;
-            case 4:
-                if (aStarBtnV(x, y)) {
-                    route = new Route(routePos[0], routePos[1], 'a');
-                    onRoute = 5;
-                    return true;
-                } else if (dijstrakaBtnV(x, y)) {
-                    route = new Route(routePos[0], routePos[1], 'd');
-                    onRoute = 5;
-                    return true;
-                }
-                break;
-            case 5:
-                if (stopBtnV(x, y)) {
-                    route.off();
-                    return true;
-                } else if (simulateBtnV(x, y)) {
-                    route.makeWay();
-                    //route.off();
-                    return true;
-                }
-                break;
+      if (route.onRoute > 0){
+          switch (route.onRoute) {
+              case 3:
+                  if (goBtnV(x, y)) {
+                      route.onRoute = 4;
+                      return true;
+                  }
+                  break;
+              case 4:
+                  if (aStarBtnV(x, y)) {
+                      route.traceRoute('a');
+                      route.onRoute = 5;
+                      return true;
+                  } else if (dijstrakaBtnV(x, y)) {
+                      route.traceRoute('d');
+                      route.onRoute = 5;
+                      return true;
+                  }
+                  break;
+              case 5:
+                  if (stopBtnV(x, y)) {
+                      route.off();
+                      return true;
+                  } else if (simulateBtnV(x, y)) {
+                      route.makeWay();
+                      return true;
+                  }
+                  break;
+          }
+      }else if(game.stage > 0){
+        switch(game.stage){
+          case 1:
+            if (goBtnV(x, y)) {
+              if(!game.way.isEmpty()) game.done();
+              return true;
+            }
+            break;
+          case 2:
+            if (aStarBtnV(x, y)){
+              game.getAlg('a');
+              return true;
+            }else if (dijstrakaBtnV(x, y)){
+              game.getAlg('d');
+              return true;
+            }
+            break;
+          
         }
+      }else if(game.stage + route.onRoute == 0){
+        if (routeBtnV(x, y)) {
+          println("route.onRoute");
+          route.onRoute = 1;
+          return true;
+        }else if(gameBtnV(x, y)){
+          println("GAME TIME");
+          game.start();
+          return true;
+        }  
+      }
         return false;
     }
     
-    float startX1 = 10, startY = 10;
-    float largBloco1 = 300, altBloco1 = 60;
-    float largBloco2 = 54, altBloco2 = 54;
+    private void gameBtn() {
+        startX = width/2 + startX1;
+        largBloco = largBloco1 - startX1;
+        altBloco = altBloco1;
+        drawButton("Game", color(70, 220, 78), startX + largBloco * 0.45, altBloco * 0.8);
+    }
 
     private void routeBtn() {
-        float startX = startX1;
-        float largBloco = largBloco1;
-        float altBloco = altBloco1;
-        drawButton(startX, largBloco, altBloco, "Select route", color(220, 180, 78), startX + largBloco * 0.27, altBloco * 0.8);
+        startX = startX1;
+        largBloco = largBloco1;
+        altBloco = altBloco1;
+        drawButton("Waze", color(78, 180, 220), startX + largBloco * 0.4, altBloco * 0.8);
     }
 
     private void simulateBtn() {
-        float startX = startX1;
-        float largBloco = largBloco1;
-        float altBloco = altBloco1;
-        drawButton(startX, largBloco, altBloco, "Simulate route", color(150, 150, 250), startX + largBloco * 0.25, altBloco * 0.8);
+        startX = startX1;
+        largBloco = largBloco1;
+        altBloco = altBloco1;
+        drawButton("Simulate route", color(150, 150, 250), startX + largBloco * 0.25, altBloco * 0.8);
     }
 
     private void goBtn() {
-        float largBloco = largBloco2;
-        float altBloco = altBloco2;
-        float startX = width - largBloco*1.2;
-        drawButton(startX, largBloco, altBloco, "GO", color(50, 150, 50), startX + largBloco * 0.2, altBloco * 0.85);
+        largBloco = largBloco2;
+        altBloco = altBloco2;
+        startX = width - largBloco*1.2;
+        drawButton("GO", color(50, 150, 50), startX + largBloco * 0.2, altBloco * 0.85);
     }
 
     private void stopBtn() {
-        float largBloco = tileSize * 5;
-        float altBloco = altBloco2;
-        float startX = width - largBloco*1.1;
-        drawButton(startX, largBloco, altBloco, "STOP", color(150, 50, 50), startX + largBloco * 0.2, altBloco * 0.85);
+        largBloco = tileSize * 5;
+        altBloco = altBloco2;
+        startX = width - largBloco*1.1;
+        drawButton("STOP", color(150, 50, 50), startX + largBloco * 0.2, altBloco * 0.85);
     }
 
     private void aStarBtn() {
-        float largBloco = largBloco2;
-        float altBloco = altBloco2;
-        float startX = width - largBloco*1.2;
-        drawButton(startX, largBloco, altBloco, "A*", color(255, 150, 50), startX + largBloco * 0.3, altBloco * 0.8);
+        largBloco = largBloco2;
+        altBloco = altBloco2;
+        startX = width - largBloco*1.2;
+        drawButton("A*", color(255, 150, 50), startX + largBloco * 0.3, altBloco * 0.8);
     }
 
     private void dijstrakaBtn() {
-        float largBloco = tileSize * 6;
-        float altBloco = altBloco2;
-        float startX = width - largBloco*2;
-        drawButton(startX, largBloco, altBloco, "Dijstraka", color(50, 150, 50), startX + largBloco * 0.1, altBloco * 0.8);
+        largBloco = tileSize * 6;
+        altBloco = altBloco2;
+        startX = width - largBloco*2;
+        drawButton("Dijstraka", color(50, 150, 50), startX + largBloco * 0.1, altBloco * 0.8);
     }
 
-    private void drawButton(float startX, float largBloco, float altBloco, String text, color c, float txtX, float txtY) {
+    private void drawButton(String text, color c, float txtX, float txtY) {
         fill(c, 230);
         rect(startX, startY, largBloco, altBloco, 10);
         fill(0);
@@ -120,12 +177,58 @@ public class Trigger { //<>//
     }
 
     private void routeInfo() {
-        String start = (String.format("(%d, %d) - %s", routePos[0][0], routePos[0][1], origB));
-        String goal = (String.format("(%d, %d) - %s", routePos[1][0], routePos[1][1], destB));
-        float startX = startX1;
-        float largBloco = 260;
-        float altBloco = 80;
-        drawButton(startX, largBloco, altBloco, start + "\n" + goal, color(220, 180, 78), startX*3, altBloco * 0.5);
+        String start = (String.format("(%d, %d) - %s", route.fromX, route.fromY, origB));
+        String goal = (String
+        .format("(%d, %d) - %s", route.toX, route.toY, destB));
+        startX = startX1;
+        largBloco = 260;
+        altBloco = 80;
+        drawButton(start + "\n" + goal, color(220, 180, 78), startX*3, altBloco * 0.5);
+    }
+    
+    private void timer(Route r){
+      
+      if (r.alg == 'a' || r.alg == 'd') machineInfo();
+      else playerInfo();
+      
+        startX = startX1;
+        largBloco = largBloco1*0.4;
+        altBloco = altBloco1;
+        drawButton(str(r.time), color(150, 150, 250), startX + largBloco * 0.2, altBloco * 0.8);
+      
+    }
+    
+    private void gameInfo() {
+        startX = startX1;
+        largBloco = largBloco1*0.4;
+        altBloco = altBloco1;
+        drawButton("PLAYER 1: ", color(150, 150, 250), startX + largBloco * 0.2, altBloco * 0.8);
+        playerInfo();
+        startX += largBloco*1.55;
+        fill(230, 230, 0);
+        rect(startX, altBloco*1.15, 54, -54);
+        fill(100, 0, 100);
+        text("VS", startX*1.05, altBloco*0.85);
+        startX *= 1.35;
+        largBloco = largBloco1*0.4;
+        drawButton("PLAYER 2: ", color(150, 150, 250), startX*1.08, altBloco * 0.8);
+    }
+    
+    private void playerInfo(){
+      startX = startX*1.8 + largBloco;
+      largBloco *=0.5;
+      drawButton("You", color(150, 250, 250), startX + largBloco * 0.3, altBloco * 0.8);
+    }
+    
+    private void machineInfo(){
+      startX = startX*1.8 + largBloco;
+      largBloco *=1;
+      drawButton("Machine", color(255, 150, 50), startX + largBloco * 0.2, altBloco * 0.8);
+
+    }
+    
+    private boolean gameBtnV(int x, int y) {
+        return isWithinBounds(x, y, width/2 + startX1, largBloco1 - startX1, altBloco1);
     }
 
     private boolean routeBtnV(int x, int y) {
@@ -158,7 +261,7 @@ public class Trigger { //<>//
     }
     
     void drawX(int screenX, int screenY){
-      fill(255,0,0);
+      //fill(255,0,0);
       float xCenter = screenX;
       float yCenter = screenY;
       float rectWidth = tileSize/3;

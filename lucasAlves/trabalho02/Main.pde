@@ -1,5 +1,7 @@
 import java.util.*;
 
+boolean start = false;
+
 final int chunkSize = 100;
 final int tileSize = 20;
 final int startPos = 1000;
@@ -24,12 +26,14 @@ void setup() {
 }
 
 void draw() {
-  background(0);
-  map.display();
-  if (route != null) route.display();   
-  trigger.display();
-  game.display();
-  player.update();
+  if (start){
+    background(0);
+    map.display();
+    if (route != null) route.display();   
+    trigger.display();
+    game.display();
+    player.update();
+  }else map.begin();
 }
 
 void mouseDragged() {
@@ -39,7 +43,10 @@ void mouseDragged() {
 
 void mouseReleased() {
   if(!dragging){
-    
+    if (!start){
+      start = true;
+      textFont(createFont("cheese.ttf", 32));
+    }
     if (trigger.btnTrigger(mouseX, mouseY));
     else{
       int xM = map.gridPosX(mouseX);
@@ -87,6 +94,10 @@ void mouseReleased() {
 }
 
 void keyPressed() {
+  if (!start){
+    start = true;
+    textFont(createFont("cheese.ttf", 32));
+  }
   if (key == 'r') if (route.onRoute == 0) route.onRoute = 1; else if (route.onRoute > 3) route.off(); else route.onRoute = 0; //choose route
   if (key == 'g' && route.onRoute == 3) route.onRoute = 4; //confirm points
   if (key == '5' && route.onRoute == 4)  route.traceRoute('d'); //choose algorithm

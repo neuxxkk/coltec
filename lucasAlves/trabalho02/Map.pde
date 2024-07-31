@@ -95,10 +95,11 @@ class Map {
     background(80,80,225);
     PImage img = loadImage("clt.png");
     PFont font = createFont("blood.otf", 30);
+    int ts = 70;
     textFont(font);
-    textSize(70);
+    textSize(ts);
     fill(140,0,0);
-    text("Estouradores DE CLT", width/10, height/4);
+    text("Estouradores DE CLT", (width-(ts*10))/2, (height-(ts*5))/2);
     img.resize(220, 280);
     image(img, width*0.4, height*0.4);
     textSize(30);

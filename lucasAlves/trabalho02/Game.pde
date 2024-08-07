@@ -103,7 +103,7 @@ class Game{
         break;
       case 7:
           stage = 8;
-          if (frameCount > 2){
+          if (frameCount >= 2){
             frameCount = 0;
             stage = 9;
           }

@@ -8,7 +8,7 @@ class Grafo {
   HashSet<PVector> arestas; // Posições das partículas (nós do grafo)
   double density;
   PVector[] velocidades; // Velocidades das partículas
-  final float raio = 10; // Raio dos nós
+  final float raio = 12; // Raio dos nós
   final float k = 0.01; // Constante da mola para a atração
   final float c = 3000; // Constante de repulsão
   

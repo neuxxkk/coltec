@@ -22,23 +22,23 @@ class Chunk {
   void generateChunk() {
     for (int x = 0; x < chunkSize / tileSize; x++) {
       for (int y = 0; y < chunkSize / tileSize; y++) {
-        float noise = noise((chunkX * chunkSize + x * tileSize) * 0.01, (chunkY * chunkSize + y * tileSize) * 0.01);
+        float noise = noise((chunkX * chunkSize + x * tileSize) * 0.002, (chunkY * chunkSize + y * tileSize) * 0.002);
         if (x == boatTileX && y == boatTileY){
           tiles[x][y] = 6; // boat
-        } else if (noise < 0.3 && !playerChunk && !boatChunk) {
+        } else if (noise < 0.4 && !playerChunk && !boatChunk) {
           tiles[x][y] = 0; // água
-        } else if (noise < 0.6) {
+        } else if (noise < 0.7) {
           tiles[x][y] = 1; // grama
         } else {
           tiles[x][y] = 2; // areia
         }
 
-        // Adicionar obstáculos
         if (random(1) < 0.005 && !playerChunk && !boatChunk) {
           if (tiles[x][y] == 0) tiles[x][y] = 3; // coral
           else if (tiles[x][y] == 1) tiles[x][y] = 4; // pedra
           else if (tiles[x][y] == 2) tiles[x][y] = 5; // cacto
-        }      
+        }
+      
       }
     }
   }
@@ -52,6 +52,7 @@ class Chunk {
   }
 
   void display(float offsetX, float offsetY) {
+    noStroke();
     for (int x = 0; x < chunkSize / tileSize; x++) {
       for (int y = 0; y < chunkSize / tileSize; y++) {
         float screenX = chunkX * chunkSize + x * tileSize + offsetX;
@@ -63,22 +64,22 @@ class Chunk {
 
         switch(tiles[x][y]) {
           case 0: // água
-            fill(50, 50, 200);
+            fill(#42a5f5);
             break;
           case 1: // grama
-            fill(0, 255, 0);
+            fill(#99ff88);
             break;
           case 2: // areia
-            fill(255, 255, 50);
+            fill(#ffd780);
             break;
           case 3: // coral
             fill(200, 0, 255);
             break;
           case 4: // pedra
-            fill(128);
+            fill(#a7b1c1);
             break;
           case 5: // cacto
-            fill(0, 128, 0);
+            fill(#55cc44);
             break;
           case 6: // boat
             if(!player.boat) fill(151,51,0);

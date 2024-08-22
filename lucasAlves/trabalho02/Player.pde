@@ -71,7 +71,7 @@ class Player{
       movs.remove(0);
     }else if (moving == 0 && movs.isEmpty()) stop = true;
 
-    float off = (vel/60) * tileSize * 2;
+    float off = (vel/60) * tileSize * 2 * velocidade;
     switch (moving){
       case 1: //up
         offsetY -= off;

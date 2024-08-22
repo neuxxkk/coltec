@@ -23,8 +23,8 @@ class Map {
     //noStroke();
     int startX = floor(-offsetX / chunkSize) - 1;
     int startY = floor(-offsetY / chunkSize) - 1;
-    int endX = startX + ceil(width / chunkSize) + 2;
-    int endY = startY + ceil(height / chunkSize) + 2;
+    int endX = startX + ceil(width / chunkSize) + 10;
+    int endY = startY + ceil(height / chunkSize) + 10;
   
     for (int x = startX; x < endX; x++) {
       for (int y = startY; y < endY; y++) {

@@ -4,7 +4,7 @@ void setup() {
   size(800, 600);
   frameRate(60);
   
-  int n = 10;
+  int n = 20;
   double density = 0.15;
   int[][] adj = new int[n][n];
   

@@ -4,7 +4,8 @@ boolean start = false;
 
 final int chunkSize = 100;
 final int tileSize = 20;
-final int startPos = 1000;
+final int velocidade = 2;
+int startPos;
 
 boolean dragging = false;
 int xT, yT; //cheat
@@ -16,7 +17,9 @@ Route route;
 Game game;
 
 void setup() {
-  size(800, 800);
+  //size(1300, 800);
+  fullScreen();
+  startPos = int(random(100, 1000));
   map = new Map(chunkSize, tileSize);
   player = new Player(startPos,startPos);
   route = new Route();
@@ -112,4 +115,6 @@ void keyPressed() {
   if ((key == 'd' || key == 'D') && player.allowedTiles.contains(map.getTileValue(player.posX+1, player.posY))) player.move(-2);
   
   if (key == 'y' && game.reading) game.done();
+  
+  if (key == '*') setup();
 }

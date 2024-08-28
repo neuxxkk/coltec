@@ -1,0 +1,119 @@
+// Simples classe de Vetor
+var createVector = function(x, y) {
+    return {x: x, y: y};
+};
+
+var addVectors = function(v1, v2) {
+    return createVector(v1.x + v2.x, v1.y + v2.y);
+};
+
+var limitVector = function(v, max) {
+    var mag = Math.sqrt(v.x * v.x + v.y * v.y);
+    if (mag > max) {
+        v.x = (v.x / mag) * max;
+        v.y = (v.y / mag) * max;
+    }
+    return v;
+};
+
+// Classe Spaceship
+var Spaceship = function() {
+    this.position = createVector(width/2, height/2);
+    this.velocity = createVector(0, 0);
+    this.acceleration = createVector(0, 0);
+    this.maxSpeed = 8;
+    this.angle = 0;  // Angulo de orientação da nave
+    this.angularVelocity = 0; // Velocidade angular
+    this.maxAngularVelocity = 0.1; // Velocidade angular máxima
+    this.thrust = 0.2; // Intensidade do impulso
+};
+
+Spaceship.prototype.update = function() {
+    // Atualizar a rotação
+    this.angle += this.angularVelocity;
+
+    // Atualizar a posição
+    this.acceleration.x = Math.cos(this.angle) * this.thrust;
+    this.acceleration.y = Math.sin(this.angle) * this.thrust;
+    
+    this.velocity = addVectors(this.velocity, this.acceleration);
+    this.velocity = limitVector(this.velocity, this.maxSpeed);
+    
+    this.position = addVectors(this.position, this.velocity);
+    
+    // Limitar a velocidade angular
+    this.angularVelocity = limitVector({x: this.angularVelocity, y: 0}, this.maxAngularVelocity).x;
+};
+
+Spaceship.prototype.display = function() {
+    translate(this.position.x, this.position.y);
+    rotate(this.angle);
+    
+    // Desenhar a nave
+    fill(0);
+    stroke(255);
+    strokeWeight(2);
+    beginShape();
+    vertex(-10, 10);
+    vertex(10, 10);
+    vertex(0, -20);
+    endShape(CLOSE);
+
+    // Desenhar os propulsores
+    fill(255, 0, 0);
+    noStroke();
+    triangle(-10, 10, -15, 15, -10, 20);
+    triangle(10, 10, 15, 15, 10, 20);
+    
+    // Restaurar o estado de transformação
+    rotate(-this.angle);
+    translate(-this.position.x, -this.position.y);
+};
+
+Spaceship.prototype.checkEdges = function() {
+    if (this.position.x > width) {
+        this.position.x = 0;
+    } else if (this.position.x < 0) {
+        this.position.x = width;
+    }
+
+    if (this.position.y > height) {
+        this.position.y = 0;
+    } else if (this.position.y < 0) {
+        this.position.y = height;
+    }
+};
+
+Spaceship.prototype.turnLeft = function() {
+    this.angularVelocity -= 0.01; // Ajuste a velocidade angular para girar à esquerda
+};
+
+Spaceship.prototype.turnRight = function() {
+    this.angularVelocity += 0.01; // Ajuste a velocidade angular para girar à direita
+};
+
+Spaceship.prototype.thrust = function() {
+    this.acceleration.x = Math.cos(this.angle) * this.thrust;
+    this.acceleration.y = Math.sin(this.angle) * this.thrust;
+};
+
+// Instância da nave
+var spaceship = new Spaceship();
+
+function keyPressed() {
+    if (keyCode === 37) {  // Código da tecla esquerda
+        spaceship.turnLeft();
+    } else if (keyCode === 39) {  // Código da tecla direita
+        spaceship.turnRight();
+    } else if (key === 'z') {
+        spaceship.thrust();
+    }
+}
+
+function draw() {
+    background(0);  // Tela preta para melhor visualização
+    spaceship.update();
+    spaceship.checkEdges();
+    spaceship.display();
+}
+

@@ -94,7 +94,7 @@ class Chunk {
             break;
           case 6: // boat
             if(!player.boat) fill(151,51,0);
-            else tiles[x][y] = int(random(1,3));
+            else tiles[x][y] = this.beforeBoat;
             break;
           case 9:// black
             fill(0);

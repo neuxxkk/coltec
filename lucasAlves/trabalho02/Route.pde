@@ -17,13 +17,17 @@ class Route{
   }
   
    void traceRoute(char m){
-    setLimits();
-    setAdjMatrix();
-    generateAdjMatrix();
-    this.alg = m;
-    if (alg == 'a') aStar();
-    if (alg == 'd') dijstraka();
-    costCalculator();
+     int range = 1;
+     do{
+      setLimits(range);
+      setAdjMatrix();
+      generateAdjMatrix();
+      this.alg = m;
+      if (alg == 'a') aStar();
+      if (alg == 'd') dijstraka();
+      range++;
+     }while (path.isEmpty() || range > 5);
+     costCalculator();
   }
   
   Route clone(char c){
@@ -54,8 +58,8 @@ class Route{
     }
   }
   
-  void setLimits(){
-    int minRange = chunkSize/tileSize;
+  void setLimits(int r){
+    int minRange = (chunkSize/tileSize) * r;
     this.startX = (fromX <= toX) ? fromX - minRange : toX - minRange;
     int lastX = (fromX <= toX) ? toX + minRange : fromX + minRange;
     
@@ -215,7 +219,7 @@ class Route{
   
   void display(color c){
     fill(c);
-    trigger.drawX(map.screenPosX(toX), map.screenPosY(toY));
+    trigger.drawX(map.screenPosX(toX), map.screenPosY(toY));    
     for (int i : path){
       if (i!=destinyV) ellipse(map.screenPosX(getGridX(i)), map.screenPosY(getGridY(i)), tileSize/3, tileSize/3);
     }

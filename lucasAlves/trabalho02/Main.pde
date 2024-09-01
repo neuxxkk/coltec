@@ -4,7 +4,7 @@ boolean start = false;
 
 final int chunkSize = 100;
 final int tileSize = 20;
-final int velocidade = 2;
+final int velocidade = 1;
 int startPos;
 
 boolean dragging = false;
@@ -17,15 +17,15 @@ Route route;
 Game game;
 
 void setup() {
-  //size(1300, 800);
-  fullScreen();
+  size(800, 800);
+  //fullScreen();
   startPos = int(random(100, 1000));
   map = new Map(chunkSize, tileSize);
-  player = new Player(startPos,startPos);
+  player = new Player();
   route = new Route();
   trigger = new Trigger();
   game = new Game();
-  map.reset(startPos, startPos);
+  map.reset(player.posX, player.posY);
 }
 
 void draw() {

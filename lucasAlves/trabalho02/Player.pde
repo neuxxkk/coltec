@@ -6,18 +6,18 @@ class Player{
   float screenPosX, screenPosY;
   float vel;
   float offsetX, offsetY;
-  ArrayList<Integer> allowedTiles = new ArrayList<Integer>(), movs = new ArrayList<Integer>();
+  ArrayList<Integer> allowedTiles, movs;
   boolean boat;
   
-  public Player(int x, int y){
-    allowedTiles.add(1);
-    allowedTiles.add(2);
-    allowedTiles.add(6);
-    this.posX = x;
-    this.posY = y;
+  public Player(){
+    setPlayer();
     this.posTile = map.getTileValue(posX, posY);
-    this.screenPosX = map.screenPosX(x);
-    this.screenPosY = map.screenPosX(y);
+    this.screenPosX = map.screenPosX(posX);
+    this.screenPosY = map.screenPosX(posY);
+    
+    allowedTiles = new ArrayList<Integer>(Arrays.asList(1,2,6));
+    movs = new ArrayList<Integer>();
+    
     boat = false;
     stop = false;
     update();
@@ -25,9 +25,14 @@ class Player{
   
   void update(){
     this.display();
+    
+    this.screenPosX = map.screenPosX(posX);
+    this.screenPosY = map.screenPosY(posY);
+
     posTile = map.getTileValue(posX, posY);
     if (movs !=null || moving != 0) movePlayer();
     if (map.renderized && allowedTiles.contains(posTile))
+      if (!(route.onRoute > 0 && route.onRoute < 3)) this.checkEdges();
       switch (posTile){ //breca a verificação de chunkPlayer
         case 0:
           this.vel = 2;
@@ -47,6 +52,24 @@ class Player{
           break;
       }
     }
+    
+    public void setPlayer(){
+      while (true){
+        PVector randPos = new PVector(int(random(1000)), int(random(1000)));
+
+        Object [] ct = map.getChunkTile((int)randPos.x, (int)randPos.y);
+        Chunk playerChunk = map.chunks.get((String)ct[0]);
+        PVector tile = (PVector) ct[1];
+        
+        
+        // Caso densidade > 50% repeat
+        if (playerChunk.density != 0 && playerChunk.tiles[(int)tile.x][(int)tile.y] != 0){
+          this.posX = (int)randPos.x;
+          this.posY = (int)randPos.y;
+          break;
+        }
+      }
+    }
   
   void display(){
     fill(255,10,10);
@@ -56,6 +79,14 @@ class Player{
   void move(ArrayList <Integer> movs){
     this.movs = movs;
     stop = false;
+  }
+  
+  void checkEdges(){
+    if (this.screenPosY > height*0.9) map.drag(0, -1*velocidade);
+    else if (this.screenPosY < height*0.1) map.drag(0, 1*velocidade);
+    
+    if (this.screenPosX > height*0.9) map.drag(-1*velocidade, 0);
+    else if (this.screenPosX < height*0.1) map.drag(1*velocidade, 0); 
   }
   
   void move(int movs){
@@ -70,7 +101,6 @@ class Player{
       moving = movs.get(0);
       movs.remove(0);
     }else if (moving == 0 && movs.isEmpty()) stop = true;
-
     float off = (vel/60) * tileSize * 2 * velocidade;
     switch (moving){
       case 1: //up

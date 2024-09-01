@@ -1,22 +1,21 @@
 class Map {
-  boolean renderized = false;
+  boolean renderized;
   int chunkSize, tileSize;
   float offsetX, offsetY;
   HashMap<String, Chunk> chunks;
   
-  int boatDistance;
-  String playerKey;
-  String boatKey;
+  boolean setBoat;
 
   Map(int chunkSize, int tileSize) {
-    this.boatDistance = width/chunkSize/2;
-    this.boatKey = ( (startPos / (chunkSize/tileSize) + int(random(-boatDistance,boatDistance))) + "," + (startPos / (chunkSize/tileSize) + int(random(-boatDistance, boatDistance))) );
-    this.playerKey = (startPos / (chunkSize/tileSize)+ "," + startPos / (chunkSize/tileSize));
     this.chunkSize = chunkSize;
     this.tileSize = tileSize;
     this.offsetX = 0;
     this.offsetY = 0;
-    this.chunks = new HashMap<String, Chunk>();
+    
+    renderized = false;
+    setBoat = true;
+    
+    chunks = new HashMap<String, Chunk>();
   }
   
   void display() {
@@ -37,7 +36,27 @@ class Map {
         //if (renderized && chunks.containsKey(myKey)) Arrays.fill(chunks.get(myKey).tiles, new int[]{9,9,9,9,9}); // chunk rastreator
       }
     }
+    if (this.setBoat) setBoat();
   }
+  
+  public void setBoat(){
+      this.setBoat = true;
+      while (setBoat){
+        int pX = player.posX, pY = player.posY;
+        PVector randGrid = new PVector((int)random(pX - (width/tileSize/2), pX + (width/tileSize/2)), (int)random(pY - (height/tileSize/2), pY + (height/tileSize/2.5)));
+        
+        Object [] ct = this.getChunkTile((int)randGrid.x, (int)randGrid.y);
+        Chunk BoatChunk = chunks.get((String)ct[0]);
+        PVector tile = (PVector) ct[1];
+        
+        // Caso densidade predominate agua repeat
+        if (BoatChunk.density != 0){
+          BoatChunk.beforeBoat = BoatChunk.tiles[(int)tile.x][(int)tile.y];
+          BoatChunk.tiles[(int)tile.x][(int)tile.y] = 6;
+          this.setBoat = false;
+        }
+      }
+    }
 
   void drag(float _offsetX, float _offsetY) {
     if(this.gridPosX(0) < 0 || this.gridPosY(0) < 0){
@@ -77,7 +96,7 @@ class Map {
     return (gridY * tileSize + (int)offsetY) + tileSize/2;
   }
   
-  int getTileValue(int gridX, int gridY) {
+  Object[] getChunkTile(int gridX, int gridY){
     int chunkX = floor(gridX * tileSize / (float) chunkSize);
     int chunkY = floor(gridY * tileSize / (float) chunkSize);
     String key = chunkX + "," + chunkY;
@@ -85,10 +104,20 @@ class Map {
     if (!chunks.containsKey(key)) {
       chunks.put(key, new Chunk(chunkX, chunkY));
     }
+    
+      PVector tile = new PVector();
+      tile.x = gridX % (chunkSize / tileSize);
+      tile.y = gridY % (chunkSize / tileSize);
+          
+      return new Object[] {key, tile};
+  }
+  
+  int getTileValue(int gridX, int gridY) {
+      Object[] ct = getChunkTile(gridX, gridY);
+      String key = (String)ct[0];
+      PVector local = (PVector)ct[1];
       Chunk chunk = chunks.get(key);
-      int localX = gridX % (chunkSize / tileSize);
-      int localY = gridY % (chunkSize / tileSize);
-      return chunk.getTile(localX, localY);
+      return chunk.getTile((int)local.x, (int)  local.y);
   }
   
   void begin(){

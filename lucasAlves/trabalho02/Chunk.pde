@@ -2,38 +2,36 @@ class Chunk {
   int chunkX, chunkY;
   String key;
   int[][] tiles;
-  boolean playerChunk, boatChunk;
-  int boatTileX, boatTileY;
+  int density; // Mostly 0, 1, 2 - water, grass, sand
+  int beforeBoat; // tileValue before Boat
 
   Chunk(int x, int y) {
-    chunkX = x;
-    chunkY = y;
-    key = x + "," + y;
+    this.chunkX = x;
+    this.chunkY = y;
+    this.key = x + "," + y;
+    this.beforeBoat = int(random(1,3));
+    this.density = 0;
     tiles = new int[chunkSize / tileSize][chunkSize / tileSize];
-    
-    playerChunk = (key.equals(map.playerKey)) ? true : false;
-    boatChunk = (key.equals(map.boatKey)) ? true: false;
-    boatTileX = (boatChunk)? int(random(chunkSize/tileSize)) : -1;
-    boatTileY = (boatChunk)? int(random(chunkSize/tileSize)) : -1;
-    
     generateChunk();
   }
 
   void generateChunk() {
+    int [] count = new int[3];
     for (int x = 0; x < chunkSize / tileSize; x++) {
       for (int y = 0; y < chunkSize / tileSize; y++) {
         float noise = noise((chunkX * chunkSize + x * tileSize) * 0.002, (chunkY * chunkSize + y * tileSize) * 0.002);
-        if (x == boatTileX && y == boatTileY){
-          tiles[x][y] = 6; // boat
-        } else if (noise < 0.4 && !playerChunk && !boatChunk) {
+        if (noise < 0.4) {
+          count[0] ++;
           tiles[x][y] = 0; // água
         } else if (noise < 0.7) {
+          count[1] ++;
           tiles[x][y] = 1; // grama
         } else {
+          count[2] ++;
           tiles[x][y] = 2; // areia
         }
 
-        if (random(1) < 0.005 && !playerChunk && !boatChunk) {
+        if (random(1) < 0.005) {
           if (tiles[x][y] == 0) tiles[x][y] = 3; // coral
           else if (tiles[x][y] == 1) tiles[x][y] = 4; // pedra
           else if (tiles[x][y] == 2) tiles[x][y] = 5; // cacto
@@ -41,6 +39,11 @@ class Chunk {
       
       }
     }
+    
+    if (count[0] > count[1] && count[0] > count[2]) this.density = 0;
+    else if (count[1] > count[2]) this.density = 1;
+    else this.density = 2;
+    
   }
   
   int getTile(int localX, int localY) {
@@ -48,6 +51,14 @@ class Chunk {
       return tiles[localX][localY];
     } else {
       return -1;
+    }
+  }
+
+  void mark(){
+    for (int i=0; i<chunkSize/tileSize; i++){
+      for (int j=0; j<chunkSize/tileSize; j++){
+        tiles[i][j] = 9;
+      }
     }
   }
 
@@ -85,7 +96,7 @@ class Chunk {
             if(!player.boat) fill(151,51,0);
             else tiles[x][y] = int(random(1,3));
             break;
-          case 9:// cacto
+          case 9:// black
             fill(0);
             break;
         }

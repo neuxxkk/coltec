@@ -17,16 +17,16 @@ class Route{
   }
   
    void traceRoute(char m){
-     int range = 1;
-     do{
-      setLimits(range);
-      setAdjMatrix();
-      generateAdjMatrix();
-      this.alg = m;
-      if (alg == 'a') aStar();
-      if (alg == 'd') dijstraka();
-      range++;
-     }while (path.isEmpty() || range > 5);
+     float range = 0.5;
+       do{
+        setLimits(range);
+        setAdjMatrix();
+        generateAdjMatrix();
+        this.alg = m;
+        if (alg == 'a') aStar();
+        if (alg == 'd') dijstraka();
+        range += 0.5;
+       }while (path.isEmpty() && range < 5 && m != '0');
      costCalculator();
   }
   
@@ -58,8 +58,8 @@ class Route{
     }
   }
   
-  void setLimits(int r){
-    int minRange = (chunkSize/tileSize) * r;
+  void setLimits(float r){
+    int minRange = int((chunkSize/tileSize) * r);
     this.startX = (fromX <= toX) ? fromX - minRange : toX - minRange;
     int lastX = (fromX <= toX) ? toX + minRange : fromX + minRange;
     

@@ -85,8 +85,8 @@ class Player{
     if (this.screenPosY > height*0.9) map.drag(0, -1*velocidade);
     else if (this.screenPosY < height*0.1) map.drag(0, 1*velocidade);
     
-    if (this.screenPosX > height*0.9) map.drag(-1*velocidade, 0);
-    else if (this.screenPosX < height*0.1) map.drag(1*velocidade, 0); 
+    if (this.screenPosX > width*0.9) map.drag(-1*velocidade, 0);
+    else if (this.screenPosX < width*0.1) map.drag(1*velocidade, 0); 
   }
   
   void move(int movs){

@@ -63,7 +63,7 @@ class Game{
     playerRoute.onRoute = 2;
     playerRoute.getCoord(to[0], to[1]);
     playerRoute.traceRoute('0');
-    
+        
     for (Integer i[] : way){
         int vertice = playerRoute.getVertice(i[0], i[1]);
         playerRoute.path.add(vertice);
@@ -71,7 +71,7 @@ class Game{
     playerRoute.costCalculator();
   }
   
-  void animation(){ 
+  void animation(){
     float time = frameCount/frameRate * 100;
     time = round(time/10);
     time /= 10;

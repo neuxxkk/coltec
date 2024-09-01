@@ -106,8 +106,8 @@ class Map {
     }
     
       PVector tile = new PVector();
-      tile.x = gridX % (chunkSize / tileSize);
-      tile.y = gridY % (chunkSize / tileSize);
+      tile.x = abs(gridX % (chunkSize / tileSize));
+      tile.y = abs(gridY % (chunkSize / tileSize));
           
       return new Object[] {key, tile};
   }

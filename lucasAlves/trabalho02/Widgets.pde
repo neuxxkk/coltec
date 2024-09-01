@@ -1,4 +1,4 @@
-public class Trigger { //<>// //<>//
+public class Trigger { //<>// //<>// //<>//
     private String origB, destB;
     private float startX, largBloco, altBloco;
     private float startX1 = 10, startY = 10;
@@ -27,6 +27,7 @@ public class Trigger { //<>// //<>//
       }else if (game.stage > 0){
         switch (game.stage){
           case 1:
+            gameInst();
             goBtn();
             break;
           case 2:
@@ -202,16 +203,16 @@ public class Trigger { //<>// //<>//
         startX = startX1;
         largBloco = largBloco1*0.4;
         altBloco = altBloco1;
-        drawButton("PLAYER 1: ", color(150, 150, 250), startX + largBloco * 0.2, altBloco * 0.8);
+        drawButton("PLAYER 1: ", color(150, 150, 250), startX*1.35 + largBloco * 0.2, altBloco * 0.8);
         playerInfo();
         startX += largBloco*1.55;
         fill(230, 230, 0);
         rect(startX, altBloco*1.15, 54, -54);
         fill(100, 0, 100);
-        text("VS", startX*1.05, altBloco*0.85);
+        text("VS", startX*1.02, altBloco*0.85);
         startX *= 1.35;
         largBloco = largBloco1*0.4;
-        drawButton("PLAYER 2: ", color(150, 150, 250), startX*1.08, altBloco * 0.8);
+        drawButton("PLAYER 2: ", color(150, 150, 250), startX*1.15, altBloco * 0.8);
     }
     
     private void playerInfo(){
@@ -225,6 +226,13 @@ public class Trigger { //<>// //<>//
       largBloco *=1;
       drawButton("Machine", color(255, 150, 50), startX + largBloco * 0.2, altBloco * 0.8);
 
+    }
+    
+    private void gameInst(){
+        startX = width/4;
+        largBloco = largBloco1;
+        altBloco = altBloco1;
+        drawButton("Selecione sua rota ideal, bloco por bloco!", color(#CCF8FA), startX*1.05 + largBloco * 0.2, altBloco * 0.8);
     }
     
     private boolean gameBtnV(int x, int y) {

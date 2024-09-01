@@ -17,8 +17,8 @@ Route route;
 Game game;
 
 void setup() {
-  size(800, 800);
-  //fullScreen();
+  //size(800, 800);
+  fullScreen();
   startPos = int(random(100, 1000));
   map = new Map(chunkSize, tileSize);
   player = new Player();

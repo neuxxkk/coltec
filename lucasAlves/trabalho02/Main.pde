@@ -4,7 +4,7 @@ boolean start = false;
 
 final int chunkSize = 100;
 final int tileSize = 20;
-final int velocidade = 2;
+final int velocidade = 4;
 int startPos;
 
 boolean dragging = false;
@@ -19,7 +19,7 @@ Game game;
 void setup() {
   //size(800, 800);
   fullScreen();
-  startPos = int(random(100, 1000));
+  startPos = int(random(1000, 10000));
   map = new Map(chunkSize, tileSize);
   player = new Player();
   route = new Route();

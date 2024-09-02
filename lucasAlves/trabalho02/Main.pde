@@ -4,7 +4,7 @@ boolean start = false;
 
 final int chunkSize = 100;
 final int tileSize = 20;
-final int velocidade = 5;
+final int velocidade = 2;
 int startPos;
 
 boolean dragging = false;

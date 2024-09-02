@@ -82,11 +82,11 @@ class Player{
   }
   
   void checkEdges(){
-    if (this.screenPosY > height*0.85) map.drag(0, -1*velocidade);
-    else if (this.screenPosY < height*0.15) map.drag(0, 1*velocidade);
-    
-    if (this.screenPosX > width*0.85) map.drag(-1*velocidade, 0);
-    else if (this.screenPosX < width*0.15) map.drag(1*velocidade, 0); 
+    if (this.screenPosY > height*0.75) map.drag(0, -ceil(vel));
+    else if (this.screenPosY < height*0.25) map.drag(0, ceil(vel));
+    println(vel);
+    if (this.screenPosX > width*0.75) map.drag(-ceil(vel), 0);
+    else if (this.screenPosX < width*0.25) map.drag(ceil(vel), 0); 
   }
   
   void dropBoat(){

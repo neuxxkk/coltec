@@ -4,7 +4,7 @@ boolean start = false;
 
 final int chunkSize = 100;
 final int tileSize = 20;
-final int velocidade = 1;
+final int velocidade = 5;
 int startPos;
 
 boolean dragging = false;
@@ -113,6 +113,8 @@ void keyPressed() {
   if ((key == 's' || key == 'S') && player.allowedTiles.contains(map.getTileValue(player.posX, player.posY+1))) player.move(-1);
   if ((key == 'a' || key == 'A') && player.allowedTiles.contains(map.getTileValue(player.posX-1, player.posY))) player.move(2);
   if ((key == 'd' || key == 'D') && player.allowedTiles.contains(map.getTileValue(player.posX+1, player.posY))) player.move(-2);
+  
+  if (key == 'n' || key == 'N') if (player.boat) player.dropBoat();
   
   if (key == 'y' && game.reading) game.done();
   

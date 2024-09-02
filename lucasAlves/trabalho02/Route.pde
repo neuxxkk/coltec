@@ -109,7 +109,11 @@ class Route{
     for (int i : path){
       //println(0, i);
       current = i;
-      this.cost += adjMatrix[current][past];
+      try{
+        this.cost += adjMatrix[current][past];
+      }catch(Exception e){
+        
+      }
       past = i;
     }
     return cost;

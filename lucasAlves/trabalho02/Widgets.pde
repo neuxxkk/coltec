@@ -1,4 +1,4 @@
-public class Trigger { //<>// //<>// //<>//
+public class Trigger { //<>//
     private String origB, destB;
     private float startX, largBloco, altBloco;
     private float startX1 = 10, startY = 10;

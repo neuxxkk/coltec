@@ -82,11 +82,31 @@ class Player{
   }
   
   void checkEdges(){
-    if (this.screenPosY > height*0.9) map.drag(0, -1*velocidade);
-    else if (this.screenPosY < height*0.1) map.drag(0, 1*velocidade);
+    if (this.screenPosY > height*0.85) map.drag(0, -1*velocidade);
+    else if (this.screenPosY < height*0.15) map.drag(0, 1*velocidade);
     
-    if (this.screenPosX > width*0.9) map.drag(-1*velocidade, 0);
-    else if (this.screenPosX < width*0.1) map.drag(1*velocidade, 0); 
+    if (this.screenPosX > width*0.85) map.drag(-1*velocidade, 0);
+    else if (this.screenPosX < width*0.15) map.drag(1*velocidade, 0); 
+  }
+  
+  void dropBoat(){
+    int [] dX = new int[] {1,-1,0,0};
+    int [] dY = new int[] {0,0,-1,1};
+    
+    if (posTile != 0)
+      for (int i=0; i<4; i++){
+        int [] viz = new int [] {posX + dX[i], posY + dY[i]};
+        int vizinhoTile = map.getTileValue(viz[0], viz[1]);
+        if (vizinhoTile != 0){
+          this.boat = false;
+          this.allowedTiles.remove(Integer.valueOf(0));
+          Object [] ct = map.getChunkTile(viz[0], viz[1]);
+          String key = (String)ct[0];
+          map.chunks.get(key).tiles[(int)((PVector)ct[1]).x][(int)((PVector)ct[1]).y] = 6;
+          map.chunks.get(key).beforeBoat = vizinhoTile;
+          break;
+        }
+      }
   }
   
   void move(int movs){

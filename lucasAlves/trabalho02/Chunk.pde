@@ -23,7 +23,7 @@ class Chunk {
         if (noise < 0.4) {
           count[0] ++;
           tiles[x][y] = 0; // água
-        } else if (noise < 0.7) {
+        } else if (noise < 0.6) {
           count[1] ++;
           tiles[x][y] = 1; // grama
         } else {
@@ -84,7 +84,7 @@ class Chunk {
             fill(#ffd780);
             break;
           case 3: // coral
-            fill(200, 0, 255);
+            fill(#BA14C6);
             break;
           case 4: // pedra
             fill(#a7b1c1);
@@ -94,7 +94,7 @@ class Chunk {
             break;
           case 6: // boat
             if(!player.boat) fill(151,51,0);
-            else tiles[x][y] = int(random(1,3));
+            else tiles[x][y] = beforeBoat;
             break;
           case 9:// black
             fill(0);

@@ -121,19 +121,24 @@ class Map {
   }
   
   void begin(){
-    background(80,80,225);
+    for (int i = 0; i <= height; i++) {
+      float inter = map(i, 0, height, 0, 1);  // Interpolação de 0 a 1
+      color c = lerpColor(#77CAE3, #3934F5, inter);  // Calcula a cor intermediária
+      stroke(c);
+      line(0, i, width, i);  // Desenha uma linha vertical com a cor interpolada
+    }    
     PImage img = loadImage("clt.png");
     PFont font = createFont("blood.otf", 30);
     int ts = 70;
     textFont(font);
     textSize(ts);
     fill(140,0,0);
-    text("Estouradores DE CLT", (width-(ts*10))/2, (height-(ts*5))/2);
-    img.resize(220, 280);
-    image(img, width*0.4, height*0.4);
-    textSize(30);
+    text("Estouradores DE CLT", (width-(ts*10))/2, (height-(ts*5))/4);
+    img.resize(260, 320);
+    image(img, width*0.42, height*0.25);
+    textSize(50);
     fill(0);
-    text("Press any KEY", width*.4, height*.9);
+    text("Press any KEY", width*.4, height*.7);
     
   }
   

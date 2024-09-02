@@ -77,6 +77,7 @@ class Game{
     time /= 10;
     switch (stage){
       case 3:
+        //delay(500);
         frameCount = 0;  
         playerRoute.makeWay();
         stage = 4;
@@ -84,7 +85,7 @@ class Game{
       case 4: //player done
         playerRoute.time = time;
         if (player.stop){
-          delay(500);
+          delay(200);
           stage = 5;
           frameCount = 0;
         }
@@ -136,7 +137,7 @@ class Game{
           cor = color(#D2222D);
           break;
         case 3:
-          msg = "You Got!";
+          msg = "You Got It!";
           cor = color(#FFBF00);
           cor2 = color(0);
           break; 
@@ -144,7 +145,8 @@ class Game{
       fill(cor);
       rect(width*0.4,height*0.4,width/4,height/8, 10);
       fill(cor2);
-      text(msg, width*0.47, height*0.47);
+      textSize(35);
+      text(msg, width*0.48, height*0.48);
      
   }
   

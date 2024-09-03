@@ -1,0 +1,26 @@
+apt update
+php version
+
+
+apt install nginx
+sudo add-apt-repository ppa:ondrej/php -y
+apt install php8.1
+apt install php8.1-fpm php8.1-mysql
+
+mkdir /var/www/enois
+vim /etc/nginx/sites-available/enois
+
+// caso der Erro
+sudo systemctl restart php8.1-fpm
+sudo systemctl restart nginx
+service stop apache2
+
+// link, unlink enois
+ln -s /etc/nginx/sites-available/enois /etc/nginx/sites-enabled/
+unlink /etc/nginx/sites-enabled/enois
+
+apt install mysql-server
+
+//teste php
+<?php
+phpinfo();

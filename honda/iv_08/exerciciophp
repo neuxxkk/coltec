@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name</title>
+</head>
+<body>
+    <h1>Cálculo de Fatorial e Diagonal do Paralelepípedo</h1>
+
+    <!-- Formulário para calcular o fatorial -->
+    <form method="get" action="">
+        <label for="fat">Número para Fatorial:</label>
+        <input type="number" id="fat" name="fat" required>
+        <button type="submit">Calcular Fatorial</button>
+    </form>
+
+    <!-- Formulário para calcular a diagonal do paralelepípedo -->
+    <form method="post" action="">
+        <label for="a">Valor de a:</label>
+        <input type="number" id="a" name="a" required>
+        <label for="b">Valor de b:</label>
+        <input type="number" id="b" name="b" required>
+        <label for="c">Valor de c:</label>
+        <input type="number" id="c" name="c" required>
+        <button type="submit">Calcular Diagonal</button>
+    </form>
+
+    <?php
+    function fat($x): int {
+        if ($x <= 1) {
+            return 1;
+        } else {
+            return $x * fat($x - 1);
+        }
+    }
+
+    function parap($a, $b, $c): float {
+        return sqrt(pow($a, 2) + pow($b, 2) + pow($c, 2));
+    }
+
+    if (isset($_GET["fat"])) {
+        $n = (int) $_GET["fat"];
+        echo "<p>Fatorial de " . $n . " = " . fat($n) . "</p>";
+    }
+
+    if (isset($_POST["a"]) && isset($_POST["b"]) && isset($_POST["c"])) {
+        $a = (int) $_POST["a"];
+        $b = (int) $_POST["b"];
+        $c = (int) $_POST["c"];
+        echo "<p>Diagonal do paralelepípedo = " . parap($a, $b, $c) . "</p>";
+    }
+
+    $user = "name";
+    $password = "9841";
+    $database = "teste";
+    $table = "listinha";
+
+    try {
+        $db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+
+        echo "<h2>TODO</h2><ol>";
+        foreach($db->query("SELECT content FROM $table") as $row) {
+            echo "<li>" . htmlspecialchars($row['content']) . "</li>";
+        }
+        echo "</ol>";
+
+    } catch (PDOException $e) {
+        echo "Erro: " . $e->getMessage();
+    }
+    ?>
+</body>
+</html>
+

@@ -1,0 +1,4 @@
+ hostnamectl set-hostname iA
+vim /etc/hosts
+ vim /etc/cloud/cloud.cfg
+

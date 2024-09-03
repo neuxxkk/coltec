@@ -1,0 +1,36 @@
+-- Cria o novo usuário com a senha especificada
+CREATE USER 'name'@'localhost' IDENTIFIED BY '9841';
+
+-- Concede todas as permissões ao novo usuário no banco de dados desejado
+GRANT ALL PRIVILEGES ON *.* TO 'name'@'localhost' WITH GRANT OPTION;
+
+-- Atualiza as permissões
+FLUSH PRIVILEGES;
+
+
+-- Cria o banco de dados teste se ele não existir
+CREATE DATABASE teste;
+
+-- Seleciona o banco de dados teste
+USE teste;
+
+-- Cria a tabela listinha
+CREATE TABLE listinha (
+    item_id INT AUTO_INCREMENT,
+    content VARCHAR(255),
+    PRIMARY KEY(item_id)
+);
+
+-- Insere a primeira linha na tabela listinha
+INSERT INTO listinha (content) VALUES ("Meu primeiro item");
+
+-- Insere a segunda linha na tabela listinha
+INSERT INTO listinha (content) VALUES ("Meu segundo item");
+
+-- Insere a terceira linha na tabela listinha
+-- Presumo que o nome correto da tabela seja "listinha" e o banco é "teste".
+INSERT INTO listinha (content) VALUES ("Meu terceiro item");
+
+-- Insere a quarta linha na tabela listinha
+INSERT INTO listinha (content) VALUES ("Meu quarto item");
+

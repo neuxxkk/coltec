@@ -1,9 +1,9 @@
 vim /etc/hosts
 
 127.0.0.1 localhost
-127.0.0.1 iB
+127.0.0.1 maqC
 
-10.0.0.174.enois.org.br iB
+10.0.0.ipC maqC.enois.org.br maqC
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
@@ -17,37 +17,34 @@ ff02::3 ip6-allhosts
 
 vim /etc/netplan/01-netcfg.yaml
 
-#2 interfaces Maq DNS
-# Respeite a formatacao!!
+// Maq DNS (MaqC)
 network:
   version: 2
+  renderer: networkd
   ethernets:
-    enp0s3:
-      addresses: [10.0.0.229/24]
-      gateway4: 10.0.0.1
-      nameservers:
-        search: [enois.org.br]
-        addresses: [10.0.0.229, 150.164.102.68]
-        #enp0s8:
-        #addresses: [192.168.1.229/24]
-
-
-network: # outras Maqs
- version: 2
- renderer: networkd
- ethernets:
     enp0s3:
       dhcp4: no
       addresses:
-       - 10.0.0.175/24
+       - 10.0.0.ipC/24
       routes:
-       - to: default
-         via: 10.0.0.1
+        - to: default
+          via: 10.0.0.1
       nameservers:
-              # search: [enois.org.br]
-        addresses: [10.0.0.174, 8.8.4.4]
-        #enp0s8:
-            #addresses: [192.168.1.227/24]
+        search: [enois.org.br]
+        addresses: [10.0.0.ipC]
+
+// Outras maquinas
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp0s3:
+      addresses: [10.0.0.x/24]
+      gateway4: 10.0.0.1
+      nameservers:
+        search: [enois.org.br]
+        addresses: [10.0.0.ipC]
+
 
 
 
@@ -76,15 +73,15 @@ search enois.org.br
 
  vim /etc/bind/db.enois
  
-@ IN SOA alemaoC.enois.org.br. a2023952608.teiacoltec.org.br. (
+@ IN SOA maqC.enois.org.br. a2023952608.teiacoltec.org.br. ( #
   2019071659 3H 15M 1W 1D )
-  IN A 10.0.0.229
-  NS alemaoC.enois.org.br.
+  IN A 10.0.0.ipC #
+  NS maqC.enois.org.br. #
 
-alemaoC A 10.0.0.229
-alemaoB A 10.0.0.227
-alemaoA A 10.0.0.228
-ze IN CNAME alemaoB
+maqC A 10.0.0.ipC
+maqB A 10.0.0.ipB
+maqA A 10.0.0.ipA
+ze IN CNAME maqB
 
 
 vim /etc/bind/named.conf.local

@@ -1,0 +1,8 @@
+String
+Integer
+Float 
+Boolean
+Array
+Object
+NULL
+Resource

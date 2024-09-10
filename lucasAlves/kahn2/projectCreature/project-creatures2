@@ -1,0 +1,73 @@
+var Creature = function(x, y) {
+    this.position = new PVector(x, y);
+    // Olhos posicionados dentro do corpo (aleatórios, mas separados)
+    this.eye1 = new PVector(random(-18, 18), random(-18, 18));
+    this.eye2 = new PVector(random(-18, 18), random(-18, 18));
+    this.velocity = new PVector(0, 0);
+    this.acceleration = new PVector(0, 0);
+};
+
+Creature.prototype.applyForce = function(force) {
+    this.acceleration.add(force);
+};
+
+Creature.prototype.update = function() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    
+    // Aplicar fricção
+    var friction = this.velocity.get();
+    friction.normalize();
+    friction.mult(-0.05);  // Intensidade da fricção
+    this.applyForce(friction);
+    
+    this.acceleration.mult(0);  // Limpar a aceleração
+
+    // Limitar a criatura aos limites da tela
+    if (this.position.x > 400) {
+        this.position.x = 400;
+        this.velocity.x *= -1;  // Inverte a velocidade na direção x
+    } else if (this.position.x < 0) {
+        this.position.x = 0;
+        this.velocity.x *= -1;
+    }
+
+    if (this.position.y > 400) {
+        this.position.y = 400;
+        this.velocity.y *= -1;  // Inverte a velocidade na direção y
+    } else if (this.position.y < 0) {
+        this.position.y = 0;
+        this.velocity.y *= -1;
+    }
+};
+
+Creature.prototype.display = function() {
+    stroke(0);
+    strokeWeight(2);
+    fill(245, 37, 210);
+
+    ellipse(this.position.x, this.position.y, 40, 40);
+
+    fill(22, 133, 45);
+    ellipse(this.position.x + this.eye1.x, this.position.y + this.eye1.y, 8, 8);
+    ellipse(this.position.x + this.eye2.x, this.position.y + this.eye2.y, 8, 8);
+};
+
+var creature = new Creature(100, 100);
+var gravity = new PVector(0, 0.1);  // Gravidade aplicada à criatura
+
+
+draw = function() {
+    background(255);
+    var mouse = new PVector(mouseX, mouseY);
+    var dir = PVector.sub(mouse, creature.position);
+    dir.normalize();
+    dir.mult(0.5); // Ajustar a velocidade
+    creature.applyForce(dir);
+    creature.applyForce(gravity);  // Aplicar gravidade
+
+    creature.update();
+    creature.display();
+};
+
+

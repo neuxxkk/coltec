@@ -11,7 +11,7 @@ class Platform {
   
   void update(){
     vel*=.95;
-    pos.y = constrain(pos.y+vel, 0, height);
+    pos.y = constrain(pos.y+vel, size/2.0, height-size/2.0);
   }
   
   void show() {

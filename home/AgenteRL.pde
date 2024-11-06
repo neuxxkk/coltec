@@ -6,7 +6,7 @@ class AgenteRL {
   float taxaExploracaoMinima;
   float decaimentoExploracao;
   int episodios;
-  
+
   AgenteRL(float taxaAprendizagem, float fatorDesconto, float taxaExploracaoInicial, float taxaExploracaoMinima, float decaimentoExploracao) {
     tabelaQ = new HashMap<String, Float>();
     this.taxaAprendizagem = taxaAprendizagem;
@@ -16,13 +16,13 @@ class AgenteRL {
     this.decaimentoExploracao = decaimentoExploracao;
     this.episodios = 0;
   }
-  
+
   float obterValorQ(String estado, int acao) {
     String chave = estado + "," + acao;
     if (!tabelaQ.containsKey(chave)) tabelaQ.put(chave, 0.0);
     return tabelaQ.get(chave);
   }
-  
+
   void atualizarValorQ(String estado, int acao, float recompensa, String proximoEstado) {
     float qAtual = obterValorQ(estado, acao);
     float maxProximoQ = max(obterValorQ(proximoEstado, 0), obterValorQ(proximoEstado, 1));
@@ -30,21 +30,25 @@ class AgenteRL {
     tabelaQ.put(estado + "," + acao, novoQ);
     incrementarEpisodios();
   }
-  
+
   int escolherAcao(String estado) {
     float taxaExploracao = max(taxaExploracaoMinima, taxaExploracaoInicial * exp(-decaimentoExploracao * episodios));
     //println(obterValorQ(estado, 0) + "|" + obterValorQ(estado, 1));
-    if (random(1) < taxaExploracao) return round(random(0,2));
-    else{
-      if (obterValorQ(estado, 0) >= obterValorQ(estado, 1))
-        return (obterValorQ(estado, 0) >= obterValorQ(estado, 2)) ? 0 : 2;
-      else 
-        return (obterValorQ(estado, 1) >= obterValorQ(estado, 2)) ? 1 : 2;
+    if (random(1) < taxaExploracao) return random(1)<.5 ? round(random(1)) : round(random(2, 4));
+    else {
+      int maxValue = -1;
+      int id = -1;
+      for(int i = 0; i <= 4; ++i){
+        if(maxValue != max((int)obterValorQ(estado, i), maxValue)){
+          maxValue = max((int)obterValorQ(estado, i), maxValue);
+          id = i;
+        }
+      }
+      return id;
     }
   }
-  
+
   void incrementarEpisodios() {
     episodios = (episodios + 1) % 100000;
-    
   }
 }

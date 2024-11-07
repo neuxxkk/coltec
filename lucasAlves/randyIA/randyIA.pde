@@ -1,6 +1,12 @@
 Platform platform;
 Ball ball;
 
+final int LARGURA_PLATFORM = 10;
+final int ALTURA_PLATFORM = 70;
+final float VELOCIDADE_PLATFORM = 1.5;
+
+final float RAIO_BALL = 20;
+
 float speed = 5;
 boolean fimDeJogo;
 
@@ -79,10 +85,10 @@ void keyPressed() {
 
 void setup() {
   size(1000, 500);
-  //frameRate(120);
+  frameRate(120);
   jogo = new Jogo();
   pontuacoes = new ArrayList<Integer>();
-  for (int i = 0; i < 10000000; i++) {
+  for (int i = 0; i < 1000000; i++) {
     jogo.atualizar();
     if (fimDeJogo) {
       pontuacoes.add(jogo.pontuacao);
@@ -105,6 +111,7 @@ void draw() {
   if (fimDeJogo) {
     pontuacoes.add(jogo.pontuacao);
     pontuacaoMax = max(pontuacaoMax, jogo.pontuacao);
+    println(jogo.pontuacao);
     jogo.reiniciar();
     //setup();
   }

@@ -25,7 +25,7 @@ class AgenteRL {
 
   void atualizarValorQ(String estado, int acao, float recompensa, String proximoEstado) {
     float qAtual = obterValorQ(estado, acao);
-    float maxProximoQ = max(obterValorQ(proximoEstado, 0), obterValorQ(proximoEstado, 1));
+    float maxProximoQ = max(obterValorQ(proximoEstado, 0), obterValorQ(proximoEstado, 1), obterValorQ(proximoEstado, 2));
     float novoQ = qAtual + taxaAprendizagem * (recompensa + fatorDesconto * maxProximoQ - qAtual);
     tabelaQ.put(estado + "," + acao, novoQ);
     incrementarEpisodios();
@@ -34,17 +34,13 @@ class AgenteRL {
   int escolherAcao(String estado) {
     float taxaExploracao = max(taxaExploracaoMinima, taxaExploracaoInicial * exp(-decaimentoExploracao * episodios));
     //println(obterValorQ(estado, 0) + "|" + obterValorQ(estado, 1));
-    if (random(1) < taxaExploracao) return random(1)<.5 ? round(random(1)) : round(random(2, 4));
+    if (random(1) < taxaExploracao) return round(random(2));
     else {
-      int maxValue = -1;
-      int id = -1;
-      for(int i = 0; i <= 4; ++i){
-        if(maxValue != max((int)obterValorQ(estado, i), maxValue)){
-          maxValue = max((int)obterValorQ(estado, i), maxValue);
-          id = i;
-        }
-      }
-      return id;
+      if (obterValorQ(estado, 0) >= obterValorQ(estado, 1))
+        if (obterValorQ(estado, 0) >= obterValorQ(estado, 2)) return 0;
+        else return 2;
+      else if (obterValorQ(estado, 1) >= obterValorQ(estado, 2)) return 1;
+        else return 2;
     }
   }
 

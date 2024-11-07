@@ -11,27 +11,21 @@ class Jogo {
   int ultimaAcao;
 
   Jogo() {
-    platform = new Platform(20, height / 2.0, 50);
-    ball = new Ball(width/2, height/2, 10, speed);
-    //agente = new AgenteRL(.1, .95, 0.8, .001, .001);
-    agente = new AgenteRL(0.386, .8, 0.4, 0.01, 0.5);
-    //agente = new AgenteRL(random(1), random(1), random(1), random(1), random(1));
-    //agente = new AgenteRL(96, 81, 38, 54, 26);
-    //agente = new AgenteRL(0.1, 0.6, 0.001, 0.5, 0.05);
-    println(agente.taxaAprendizagem, agente.fatorDesconto, agente.taxaExploracaoInicial, agente.taxaExploracaoMinima, agente.decaimentoExploracao);
+    platform = new Platform(20, height/2, ALTURA_PLATFORM, LARGURA_PLATFORM, VELOCIDADE_PLATFORM);
+    ball = new Ball(width/2, height/2, RAIO_BALL, speed);
+    agente = new AgenteRL(0.1, 0.99, 1.0, 0.01, 0.001);
     reiniciar();
   }
 
   void reiniciar() {
-
-    platform = new Platform(20, height / 2.0, 50);
+    platform = new Platform(20, height/2, ALTURA_PLATFORM, LARGURA_PLATFORM, VELOCIDADE_PLATFORM);
     ball = new Ball(width/2, height/2, 10, speed);
     pontuacao = 0;
     fimDeJogo = false;
     quadroAtual = 0;
     quadroUltimaAcao = 0;
     estadoUltimaAcao = obterEstado();
-    ultimaAcao = 0;
+    ultimaAcao = round(random(2));
   }
 
   String obterEstado() {
@@ -45,44 +39,34 @@ class Jogo {
 
     // Ação do RL
     if (quadroAtual - quadroUltimaAcao >= 5) {
-
-
-      float recompensa;
-
-      if (fimDeJogo) {
-        recompensa = -1000;
-      } else {
-        recompensa = pontuacao+1;
-      }
+  
+      float recompensa = fimDeJogo ? -100 : min(ball.pos.y, platform.pos.y) / max(ball.pos.y, platform.pos.y);
       
       String estadoAtual = obterEstado();
       agente.atualizarValorQ(estadoUltimaAcao, ultimaAcao, recompensa, estadoAtual);
 
       ultimaAcao = agente.escolherAcao(estadoAtual);
-      //velocidadePlatform = abs(ball.pos.y-platform.pos.y)/100.0*speed;
-      if (ultimaAcao == 1) platform.vel -= velocidadePlatform; // Up
-      else if (ultimaAcao == 2) platform.vel += velocidadePlatform; // Down
-      else if (ultimaAcao == 3) velocidadePlatform+=.0001;
-      else if (ultimaAcao == 4) velocidadePlatform-=.0001;
+
+      if (ultimaAcao == 1) platform.vel = - VELOCIDADE_PLATFORM; // Up
+      else if (ultimaAcao == 2) platform.vel = VELOCIDADE_PLATFORM; // Down
+
 
       estadoUltimaAcao = estadoAtual;
       quadroUltimaAcao = quadroAtual;
     }
+    
+    fimDeJogo = false;
 
     platform.update();
-    ball.update();
-
-    if (ball.pos.x-ball.size/2.0<platform.pos.x-5) fimDeJogo = true;
-    else fimDeJogo = false;
-    //pontuacao++;
+    ball.update(); 
   }
 
   void desenhar() {
     //background(bgColor);
     surface.setTitle(estadoUltimaAcao);
 
-    ball.show();
-    platform.show();
+    ball.update();
+    platform.update();
 
     // Exibe pontuação
     fill(255);

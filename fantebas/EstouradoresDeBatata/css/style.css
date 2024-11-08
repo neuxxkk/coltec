@@ -178,7 +178,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(../img/hero-img.jpg);
+    background: linear-gradient(rgba(248, 223, 173, .9), rgba(248, 223, 173, .9)), url(https://www.hellomoto.com.br/wp-content/uploads/2019/07/MOTOROLA_HEADER_HELLOMOTO_HELLOCIDADES_POA_LIVRARIA_1920x927px.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -300,7 +300,9 @@
 .fruite .fruite-item {
     height: 100%;
     transition: 0.5s;
+    border: 1px solid #ffb524 !important;
 }
+
 .fruite .fruite-item:hover {
     box-shadow: 0 0 55px rgba(0, 0, 0, 0.4);
 }

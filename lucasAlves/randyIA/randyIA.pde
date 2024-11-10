@@ -1,17 +1,21 @@
+final int eps = 1000000;
+
 Platform platform;
 Ball ball;
 
 final int LARGURA_PLATFORM = 10;
 final int ALTURA_PLATFORM = 70;
 final float VELOCIDADE_PLATFORM = 1.5;
-
+final float speed = 5;
 final float RAIO_BALL = 20;
 
-float speed = 5;
-boolean fimDeJogo;
+int total;
+int pontuacaoMax;
+
+boolean fimDeJogo, acertou;
 
 Jogo jogo;
-int pontuacaoMax = 0;
+
 
 ArrayList<Integer> pontuacoes;
 
@@ -32,16 +36,16 @@ void showGraph() {
   //beginShape();
   //vertex(0, height);
   for (int i = 0; i < pontuacoes.size()-1; ++i) {
-    line(graphScale*i-graphOffset, height/2.0-pontuacoes.get(i)*10, graphScale*(i+1)-graphOffset, height/2.0-pontuacoes.get(i+1)*10);
+    line(graphScale*i-graphOffset, height/1.5-pontuacoes.get(i)*10, graphScale*(i+1)-graphOffset, height/1.5-pontuacoes.get(i+1)*10);
   }
   //ellipse(width-l, height/2.0-pontuacoes.get(pontuacoes.size()-1)*10, 5, 5);
   int mx = round(mouseX/graphScale);
   if (mouseX>=width/100.0 && mouseX<width-width/100.0) {
     fill(255);
     noStroke();
-    ellipse(graphScale*mx, height/2.0-pontuacoes.get(mx+round(graphOffset/graphScale))*10, 5, 5);
+    ellipse(graphScale*mx, height/1.5-pontuacoes.get(mx+round(graphOffset/graphScale))*10, 5, 5);
     textSize(10);
-    text(pontuacoes.get(mx+round(graphOffset/graphScale)), graphScale*mx, height/2.0-pontuacoes.get(mx+round(graphOffset/graphScale))*10+10);
+    text(pontuacoes.get(mx+round(graphOffset/graphScale)), graphScale*mx, height/1.5-pontuacoes.get(mx+round(graphOffset/graphScale))*10+10);
     //vertex(width, height/2.0+pontuacoes.get(pontuacoes.size()-1)*10);
     //vertex(width, height);
     //endShape();
@@ -84,14 +88,18 @@ void keyPressed() {
 }
 
 void setup() {
+  total = 0;
+  pontuacaoMax = 0;
   size(1000, 500);
-  frameRate(120);
+  //frameRate(120);
   jogo = new Jogo();
   pontuacoes = new ArrayList<Integer>();
-  for (int i = 0; i < 1000000; i++) {
+  for (int i = 0; i < eps; i++) {
     jogo.atualizar();
     if (fimDeJogo) {
+      jogo.atualizar();
       pontuacoes.add(jogo.pontuacao);
+      total += jogo.pontuacao;
       pontuacaoMax = max(pontuacaoMax, jogo.pontuacao);
       jogo.reiniciar();
     }
@@ -109,6 +117,7 @@ void draw() {
 
 
   if (fimDeJogo) {
+    jogo.atualizar();
     pontuacoes.add(jogo.pontuacao);
     pontuacaoMax = max(pontuacaoMax, jogo.pontuacao);
     println(jogo.pontuacao);

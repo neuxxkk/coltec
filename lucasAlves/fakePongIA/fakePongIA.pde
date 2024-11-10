@@ -18,13 +18,13 @@ void setup(){
 
 
 void draw(){
+  background(#8899ee);
   
   platform.update();
   ball.update();
   fill(255);
   textSize(32);
   text("Pontuação: " + pontuacao, 10, 40);
-  background(255,255,255,25);
 }
 
 void keyPressed(){

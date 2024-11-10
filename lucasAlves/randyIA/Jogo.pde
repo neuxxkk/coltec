@@ -38,9 +38,16 @@ class Jogo {
     quadroAtual++;
 
     // Ação do RL
-    if (quadroAtual - quadroUltimaAcao >= 5) {
+    if (quadroAtual - quadroUltimaAcao >= 0) {
   
-      float recompensa = fimDeJogo ? -100 : min(ball.pos.y, platform.pos.y) / max(ball.pos.y, platform.pos.y);
+      float recompensa = 0;
+      if (fimDeJogo){
+        recompensa = -100;
+      }else if (acertou){
+        recompensa = 10;
+      }else{
+        recompensa = min(ball.pos.x, platform.pos.x) / max(ball.pos.x, platform.pos.x);
+      }
       
       String estadoAtual = obterEstado();
       agente.atualizarValorQ(estadoUltimaAcao, ultimaAcao, recompensa, estadoAtual);
@@ -56,6 +63,7 @@ class Jogo {
     }
     
     fimDeJogo = false;
+    acertou = false;
 
     platform.update();
     ball.update(); 
@@ -71,7 +79,8 @@ class Jogo {
     // Exibe pontuação
     fill(255);
     textSize(32);
-    text("Pontuação: " + pontuacao, 10, 40);
+    text("Pontuação: " + pontuacao, width - 220, 40);
+    text("Average: " + nf(float(total)/float(pontuacoes.size()),1,2),  width - 220, 70);
 
     if (fimDeJogo) {
       text("Fim de Jogo", width/2 - 70, height/2);

@@ -38,7 +38,7 @@ class Ball {
         
         float hitPos = (ball.pos.y - platform.pos.y) / platform.altura - 0.5; // Valor entre -0.5 e 0.5
         vel.y += hitPos * 10;
-        pontuacao++;
+        pontuacao++;  
       }
     }
     

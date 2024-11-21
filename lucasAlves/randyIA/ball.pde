@@ -34,12 +34,12 @@ class Ball {
       vel.y *= -1;
     }
 
-    if ( pos.y + (size/2) >= platform.pos.y - (platform.altura/2) && pos.y - (size/2) <= platform.pos.y + (platform.altura/2)) { // Verifica colisão do eixo Y da ball com platform
-      if (pos.x - (size/2) <= platform.pos.x + (platform.largura/2) && pos.x + (size/2) >= platform.pos.x - (platform.largura/2)) {
+    if ( pos.y + (size/2) >= paddleIA.pos.y - (paddleIA.altura/2) && pos.y - (size/2) <= paddleIA.pos.y + (paddleIA.altura/2)) { // Verifica colisão do eixo Y da ball com paddleIA
+      if (pos.x - (size/2) <= paddleIA.pos.x + (paddleIA.largura/2) && pos.x + (size/2) >= paddleIA.pos.x - (paddleIA.largura/2)) {
         
         if (count - lastHit >= 50){
           vel.x *= -1;
-          float hitPos = (ball.pos.y - platform.pos.y) / platform.altura - 0.5; // Valor entre -0.5 e 0.5
+          float hitPos = (ball.pos.y - paddleIA.pos.y) / paddleIA.altura - 0.5; // Valor entre -0.5 e 0.5
           vel.y += hitPos * 1;
           acertou = true;
           jogo.pontuacao++;
@@ -48,7 +48,6 @@ class Ball {
       }
     }
     
-    this.show();
   }
 
   void show() {

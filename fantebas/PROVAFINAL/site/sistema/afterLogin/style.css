@@ -1,0 +1,228 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(270deg, #007BFF, #28a745, #ff7f50);
+    background-size: 600% 600%;
+    animation: gradientAnimation 10s ease infinite;
+    height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Torna o body um contêiner relativo para a posição absoluta */
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Posicionando o box de informações do usuário logado no canto superior esquerdo */
+.user-info-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    max-width: 340px;
+    width: 100%;
+}
+
+.user-info-box h1 {
+    background: linear-gradient(270deg, #007BFF, #28a745, #ff7f50);
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientAnimation 10s ease infinite;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.user-info b{
+    background: linear-gradient(270deg, #007BFF, #28a745, #ff7f50);
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+.user-info-box p {
+    font-size: large;
+    margin: 5px 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px; /* Espaçamento entre os boxes */
+    max-width: 1500px;
+    width: 100%;
+    margin-left: 360px;
+    align-items: flex-start;
+    margin-top: 20px;
+    height: -webkit-fill-available;
+}
+
+/* Estilo dos boxes restantes (gerenciamento e lista de usuários) */
+.box {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 20);
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* Estilo específico para o gerenciamento de usuários */
+.user-management-box .actions {
+    margin-top: 20px;
+    /*argin-left: 100px;*/
+}
+
+.user-management-box input, select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #747b83; /* Adiciona uma borda de 2px com cor */
+    border-radius: 50px;
+    font-size: 16px;
+    outline: none;
+    background-color: #0000;
+    margin-bottom: 10px;
+    transition: border-color 0.3s; /* Transição suave para a cor da borda */
+    text-align: center;
+}
+
+option {
+    color: #000;
+    border-radius: 50px;
+}
+
+.user-management-box input:focus {
+    border-color: #28a745; /* Muda a cor da borda ao focar no input */
+}
+
+.user-management-box .btn, .sub-btn{
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 25px;
+    display: block;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+.sub-btn {
+    background-color: #28a745;
+    max-width: 150px;
+}
+
+#month{
+    color: #ddd;
+    margin-top: 10px;
+    margin-left: 10px;
+    max-width: 150px;
+}
+
+.user-management-box .btn:hover {
+    background-color: #0056b3;
+}
+
+.sub-btn:hover {
+    background-color: #218838;
+}
+
+/* Estilos para a tabela de usuários */
+.user-list-box .user-table {
+    width: 1000px;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-list-box th, .user-list-box td {
+    /* padding: 5px; */
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: 25px;
+    width: 100px;
+}
+
+.user-list-box th {
+    text-align: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ddd;
+}
+
+.user-list-box tr {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-list-box tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-list-box input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.user-list-box .selected {
+    background-color: rgba(0, 123, 255, 0.3);
+}
+
+input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+    border: 0;
+    /* border-radius: 4px; */
+    font-size: 16px;
+    outline: none;
+    background-color: #0000;
+    /* height: 100%; */
+    text-align: center;
+}
+
+input:enabled{
+    color: #fff;
+}
+
+input[readOnly]{
+    color: #ddd9;
+}
+
+.Ativo{
+    color: #fff;
+}
+
+.Inativo{
+    color: #ddd9;
+}
+
+.user-form input{
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 7px;
+}
+
+.user-management-box .cancel{
+    background-color: #f009;
+}
+.user-management-box .cancel:hover{
+    background-color: #d009;
+}
+
+

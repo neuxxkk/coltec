@@ -15,7 +15,7 @@
     
     void update(){    
       if (auto){
-        if (pos.y - (altura/2) <= 0){
+        if (pos.y - (altura/2) <= 0){ // bateu teto
           pos.y = altura/2;
           vel *= -1;
         }else if (pos.y + (altura/2) >= height){
@@ -28,7 +28,6 @@
       
       pos.y += vel;
       
-      this.show();
     }
     
     void show() {

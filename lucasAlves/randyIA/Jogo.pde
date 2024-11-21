@@ -1,7 +1,7 @@
 class Jogo {
   AgenteRL agente;
 
-  float velocidadePlatform = 5;
+  float velocidadepaddleIA = 5;
   PVector velocidadeBall = new PVector(-1, 1);
 
   int pontuacao;
@@ -11,14 +11,14 @@ class Jogo {
   int ultimaAcao;
 
   Jogo() {
-    platform = new Platform(20, height/2, ALTURA_PLATFORM, LARGURA_PLATFORM, VELOCIDADE_PLATFORM);
+    paddleIA = new Platform(20, height/2, ALTURA_PLATFORM, LARGURA_PLATFORM, VELOCIDADE_PLATFORM);
     ball = new Ball(width/2, height/2, RAIO_BALL, speed);
     agente = new AgenteRL(0.1, 0.99, 1.0, 0.01, 0.001);
     reiniciar();
   }
 
   void reiniciar() {
-    platform = new Platform(20, height/2, ALTURA_PLATFORM, LARGURA_PLATFORM, VELOCIDADE_PLATFORM);
+    paddleIA = new Platform(20, height/2, ALTURA_PLATFORM, LARGURA_PLATFORM, VELOCIDADE_PLATFORM);
     ball = new Ball(width/2, height/2, 10, speed);
     pontuacao = 0;
     fimDeJogo = false;
@@ -30,7 +30,7 @@ class Jogo {
 
   String obterEstado() {
     int ballX =  round(map(ball.pos.x, 0, width, 0, 10));
-    int aberturaErro = round(map(ball.pos.y - platform.pos.y, 0, height, 0, 20));
+    int aberturaErro = round(map(ball.pos.y - paddleIA.pos.y, 0, height, 0, 20));
     return  ballX + "," + aberturaErro;
   }
 
@@ -44,9 +44,9 @@ class Jogo {
       if (fimDeJogo){
         recompensa = -100;
       }else if (acertou){
-        recompensa = 10;
+        recompensa = 50;
       }else{
-        recompensa = min(ball.pos.x, platform.pos.x) / max(ball.pos.x, platform.pos.x);
+        recompensa = min(ball.pos.x, paddleIA.pos.x) / max(ball.pos.x, paddleIA.pos.x);
       }
       
       String estadoAtual = obterEstado();
@@ -54,8 +54,8 @@ class Jogo {
 
       ultimaAcao = agente.escolherAcao(estadoAtual);
 
-      if (ultimaAcao == 1) platform.vel = - VELOCIDADE_PLATFORM; // Up
-      else if (ultimaAcao == 2) platform.vel = VELOCIDADE_PLATFORM; // Down
+      if (ultimaAcao == 1) paddleIA.vel = - VELOCIDADE_PLATFORM; // Up
+      else if (ultimaAcao == 2) paddleIA.vel = VELOCIDADE_PLATFORM; // Down
 
 
       estadoUltimaAcao = estadoAtual;
@@ -65,7 +65,7 @@ class Jogo {
     fimDeJogo = false;
     acertou = false;
 
-    platform.update();
+    paddleIA.update();
     ball.update(); 
   }
 
@@ -74,7 +74,9 @@ class Jogo {
     surface.setTitle(estadoUltimaAcao);
 
     ball.update();
-    platform.update();
+    paddleIA.update();
+    ball.show();
+    paddleIA.show();
 
     // Exibe pontuação
     fill(255);

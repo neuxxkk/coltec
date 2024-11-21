@@ -1,0 +1,35 @@
+-- Inserir usuários
+INSERT INTO `NotaFiscal`.`Usuario` (`id_usuario`, `nome`, `cpf_cnpj`, `email`, `telefone`, `senha`, `acesso`, `pontos_usuario`)
+VALUES
+(1, 'Vitor Neuenschwander', '02306537666', 'vitornms@gmail.com', '31984152360', MD5('9841'), 'admin', 1000),
+(2, 'Maria Oliveira', '23456789012', 'maria.oliveira@example.com', '21987654321', MD5('9841'), 'cliente', 200),
+(3, 'Carlos Pereira', '34567890123', 'carlos.pereira@example.com', '31987654321', MD5('9841'), 'estabelecimento', 0),
+(4, 'Ana Souza', '45678901234', 'ana.souza@example.com', '41987654321', MD5('9841'), 'admin', 0);
+
+-- Inserir usuários
+INSERT INTO `NotaFiscal`.`Usuario` (`id_usuario`, `nome`, `cpf_cnpj`, `email`, `telefone`, `senha`, `acesso`, `pontos_usuario`)
+VALUES
+(5, 'Pedro Silva', '56789012345', 'pedro.silva@example.com', '21984567890', MD5('9841'), 'cliente', 100),
+(6, 'Julia Santos', '67890123456', 'julia.santos@example.com', '31984567890', MD5('9841'), 'cliente', 150),
+(7, 'Fernando Lima', '78901234567', 'fernando.lima@example.com', '41984567890', MD5('9841'), 'cliente', 250),
+(8, 'Luciana Almeida', '89012345678', 'luciana.almeida@example.com', '51984567890', MD5('9841'), 'cliente', 50),
+(9, 'Gabriel Costa', '90123456789', 'gabriel.costa@example.com', '61984567890', MD5('9841'), 'cliente', 300);
+
+-- Inserir registros de compra
+INSERT INTO `NotaFiscal`.`Registro_Compra` (`id_compra`, `id_usuario`, `id_estabelecimento`, `preco`, `data`, `pontos_compra`)
+VALUES
+(1, 5, 3, 150.50, '2024-11-15', 15),
+(2, 6, 3, 200.75, '2024-11-16', 20),
+(3, 2, 3, 99.90, '2024-11-16', 10),
+(4, 7, 3, 50.00, '2024-11-17', 5),
+(5, 2, 4, 500.00, '2024-11-17', 10); -- Um exemplo onde pontos não foram calculados
+
+-- Inserir registros de compra
+INSERT INTO `NotaFiscal`.`Registro_Compra` (`id_compra`, `id_usuario`, `id_estabelecimento`, `preco`, `data`, `pontos_compra`)
+VALUES
+(6, 5, 3, 120.00, '2024-11-18', 12),
+(7, 6, 3, 250.00, '2024-11-18', 25),
+(8, 7, 3, 300.00, '2024-11-19', 30),
+(9, 8, 3, 75.00, '2024-11-19', 7),
+(10, 9, 3, 400.00, '2024-11-20', 40);
+

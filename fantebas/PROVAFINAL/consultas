@@ -1,0 +1,81 @@
+1//
+SELECT 
+    u.nome AS usuario, 
+    SUM(r.preco) AS ValorTotal, 
+    SUM(r.pontos_compra) AS Pontuacao
+FROM 
+    Registro_Compra r
+JOIN 
+    Usuario u 
+ON 
+    u.id_usuario = r.id_usuario
+WHERE 
+    MONTH(r.data) = 11
+GROUP BY 
+    r.id_usuario;
+
+
+
+//2
+
+SELECT 
+    u.nome AS estabelecimento, 
+    SUM(r.preco) AS ValorTotal, 
+    COUNT(r.id_compra) AS NumCompras
+FROM 
+    Registro_Compra r
+JOIN 
+    Usuario u 
+ON 
+    u.id_usuario = r.id_estabelecimento
+WHERE 
+    MONTH(r.data) = 11
+GROUP BY 
+    r.id_estabelecimento;
+    
+ 
+ 
+ //3
+ 
+ //2
+
+SELECT 
+    u.nome AS estabelecimento, 
+    SUM(r.preco) AS Montante
+FROM 
+    Registro_Compra r
+JOIN 
+    Usuario u 
+ON 
+    u.id_usuario = r.id_estabelecimento
+WHERE 
+    r.data BETWEEN '2024-11-01' AND '2024-11-20'
+GROUP BY 
+    r.id_estabelecimento;
+    
+ 
+ 
+//4 
+SELECT 
+    u.nome Nome,
+    u.cpf_cnpj CPF,
+    u.email Email, 
+    u.telefone Telefone, 
+    e.nome Estabelecimento, 
+    r.preco Preco,
+    r.data Data 
+FROM 
+    Registro_Compra r
+JOIN 
+    Usuario u 
+ON 
+    u.id_usuario = r.id_usuario
+JOIN
+    Usuario e
+ON
+    e.id_usuario = r.id_estabelecimento
+WHERE 
+    r.data BETWEEN '2024-11-01' AND '2024-11-30'
+    AND
+    u.id_usuario = 7;
+

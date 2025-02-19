@@ -1,0 +1,18 @@
+var g = new Random(1);
+var meanX = 200, meanY = 200;
+var numX, numY;
+var standart = 50;
+
+noStroke();
+draw = function() {
+    numX = g.nextGaussian();
+    numY = g.nextGaussian();
+    var cor = color(numX * 40 + 130, numY * 40 + 130, g.nextGaussian() * 40 + 130);
+    
+    fill(cor, 80);
+    var x = numX * standart + meanX;
+    var y = numY * standart + meanY;
+    ellipse(x, y, 15, 15);
+};
+
+

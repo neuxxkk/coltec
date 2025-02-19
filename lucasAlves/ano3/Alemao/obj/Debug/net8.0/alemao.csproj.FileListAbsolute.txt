@@ -1,0 +1,14 @@
+/home/a2023952608/Área de Trabalho/alemao/bin/Debug/net8.0/alemao
+/home/a2023952608/Área de Trabalho/alemao/bin/Debug/net8.0/alemao.deps.json
+/home/a2023952608/Área de Trabalho/alemao/bin/Debug/net8.0/alemao.runtimeconfig.json
+/home/a2023952608/Área de Trabalho/alemao/bin/Debug/net8.0/alemao.dll
+/home/a2023952608/Área de Trabalho/alemao/bin/Debug/net8.0/alemao.pdb
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/alemao.GeneratedMSBuildEditorConfig.editorconfig
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/alemao.AssemblyInfoInputs.cache
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/alemao.AssemblyInfo.cs
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/alemao.csproj.CoreCompileInputs.cache
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/alemao.dll
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/refint/alemao.dll
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/alemao.pdb
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/alemao.genruntimeconfig.cache
+/home/a2023952608/Área de Trabalho/alemao/obj/Debug/net8.0/ref/alemao.dll

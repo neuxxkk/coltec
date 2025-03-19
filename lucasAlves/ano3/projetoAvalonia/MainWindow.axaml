@@ -1,0 +1,35 @@
+<Window xmlns="https://github.com/avaloniaui"
+    	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    	x:Class="projetoAvalonia.MainWindow"
+    	Title="Hallo, das ist ALEMÃO Arbeit" Width="400" Height="300">
+    <StackPanel Margin="10">
+        <!-- Exibindo um texto -->
+        <TextBlock Text="Hello World!"
+                FontSize="24"
+                HorizontalAlignment="Center"
+                Margin="0 0 0 10"/>
+    
+        <!-- Caixa de texto para entrada de dados -->
+        <TextBox x:Name="txtInput"
+                Watermark="Digite seu nome..."
+                Margin="0 0 0 10"/>
+    
+        <!-- Botão com evento de clique -->
+        <Button Content="Clique Aqui"
+                HorizontalAlignment="Center"
+                Click="BtnClique_Click"/>
+    
+
+    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+        <RadioButton x:Name="ola" GroupName="saudacao" Content="Olá" IsChecked="True"/>
+        <RadioButton x:Name="hello" GroupName="saudacao" Content="Hello" Margin="10 0 0 0"/>
+    </StackPanel>
+
+        <!-- Exemplo de controle ListBox para exibir itens -->
+    <ListBox x:Name="listaItens"
+                Margin="0 10 0 0">
+	</ListBox>
+
+  </StackPanel>
+</Window>
+

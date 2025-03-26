@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/a2023952608/avalonia/projetoAvalonia/projetoAvalonia.csproj": {}
+    "/home/a2023952608/coltec/lucasAlves/ano3/projetoAvalonia/projetoAvalonia.csproj": {}
   },
   "projects": {
-    "/home/a2023952608/avalonia/projetoAvalonia/projetoAvalonia.csproj": {
+    "/home/a2023952608/coltec/lucasAlves/ano3/projetoAvalonia/projetoAvalonia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/a2023952608/avalonia/projetoAvalonia/projetoAvalonia.csproj",
+        "projectUniqueName": "/home/a2023952608/coltec/lucasAlves/ano3/projetoAvalonia/projetoAvalonia.csproj",
         "projectName": "projetoAvalonia",
-        "projectPath": "/home/a2023952608/avalonia/projetoAvalonia/projetoAvalonia.csproj",
+        "projectPath": "/home/a2023952608/coltec/lucasAlves/ano3/projetoAvalonia/projetoAvalonia.csproj",
         "packagesPath": "/home/a2023952608/.nuget/packages/",
-        "outputPath": "/home/a2023952608/avalonia/projetoAvalonia/obj/",
+        "outputPath": "/home/a2023952608/coltec/lucasAlves/ano3/projetoAvalonia/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/a2023952608/.nuget/NuGet/NuGet.Config"
@@ -80,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/255/sdk/8.0.405/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/256/sdk/8.0.407/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

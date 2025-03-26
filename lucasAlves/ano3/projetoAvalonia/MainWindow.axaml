@@ -1,35 +1,69 @@
 <Window xmlns="https://github.com/avaloniaui"
     	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     	x:Class="projetoAvalonia.MainWindow"
-    	Title="Hallo, das ist ALEMÃO Arbeit" Width="400" Height="300">
+    	Title="2000s Converter" Width="400" Height="300">
     <StackPanel Margin="10">
         <!-- Exibindo um texto -->
-        <TextBlock Text="Hello World!"
+        <TextBlock Text="Conversor de medidas."
                 FontSize="24"
                 HorizontalAlignment="Center"
                 Margin="0 0 0 10"/>
+
+        <ComboBox Name="comboBox" SelectionChanged="tipo_selecionado" HorizontalAlignment="Center" Margin="0 0 0 10" SelectedIndex="0">
+            <ComboBoxItem Content="Selecione um tipo" IsEnabled="False"/>
+            <ComboBoxItem Content="Temperatura" />
+            <ComboBoxItem Content="Comprimento" />
+            <ComboBoxItem Content="Peso" />
+            <ComboBoxItem Content="Volume" />
+        </ComboBox>
+
+
+        <ComboBox Name="modo" SelectionChanged="modo_selecionado" HorizontalAlignment="Center" Margin="0 0 0 10" SelectedIndex="0">
+            <ComboBoxItem Content="Escolha um modo" IsEnabled="False"/>
+            <ComboBoxItem Name="c1"/>
+            <ComboBoxItem Name="c2"/>
+        </ComboBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock
+            Margin="0 5 0 0"
+            Name="m1"
+            FontSize="18"
+            HorizontalAlignment="Center"/>
+
+            <Button Content = "->"
+            Margin="10 0 10 0"
+            Name="arrow"
+            HorizontalAlignment="Center"
+            Click="invert_arrow"
+            IsVisible = "False"/>
+
+            <TextBlock
+            Margin="0 5 0 0"
+            Name="m2"
+            FontSize="18"
+            HorizontalAlignment="Center"/>
+        </StackPanel>
+
+
     
         <!-- Caixa de texto para entrada de dados -->
         <TextBox x:Name="txtInput"
-                Watermark="Digite seu nome..."
-                Margin="0 0 0 10"/>
+                HorizontalAlignment="Center"
+                Width="200"
+                Watermark="Digite o valor"
+                Margin="0 10 0 10"/>
     
         <!-- Botão com evento de clique -->
-        <Button Content="Clique Aqui"
+        <Button Content="Converter"
                 HorizontalAlignment="Center"
-                Click="BtnClique_Click"/>
+                Click="Converter"/>
+        
+        <TextBlock Name="ans"
+            Margin="0 10 0 0"
+            FontSize="24"
+            HorizontalAlignment="Center"/>
     
-
-    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-        <RadioButton x:Name="ola" GroupName="saudacao" Content="Olá" IsChecked="True"/>
-        <RadioButton x:Name="hello" GroupName="saudacao" Content="Hello" Margin="10 0 0 0"/>
     </StackPanel>
-
-        <!-- Exemplo de controle ListBox para exibir itens -->
-    <ListBox x:Name="listaItens"
-                Margin="0 10 0 0">
-	</ListBox>
-
-  </StackPanel>
 </Window>
 

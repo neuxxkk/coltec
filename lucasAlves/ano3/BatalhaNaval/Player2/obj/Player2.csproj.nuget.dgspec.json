@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/a2023952608/BatalhaNaval/Player2/Player2.csproj": {}
+    "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\BatalhaNaval\\Player2\\Player2.csproj": {}
   },
   "projects": {
-    "/home/a2023952608/BatalhaNaval/Player2/Player2.csproj": {
+    "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\BatalhaNaval\\Player2\\Player2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/a2023952608/BatalhaNaval/Player2/Player2.csproj",
+        "projectUniqueName": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\BatalhaNaval\\Player2\\Player2.csproj",
         "projectName": "Player2",
-        "projectPath": "/home/a2023952608/BatalhaNaval/Player2/Player2.csproj",
-        "packagesPath": "/home/a2023952608/.nuget/packages/",
-        "outputPath": "/home/a2023952608/BatalhaNaval/Player2/obj/",
+        "projectPath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\BatalhaNaval\\Player2\\Player2.csproj",
+        "packagesPath": "C:\\Users\\vitor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\BatalhaNaval\\Player2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/a2023952608/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\vitor\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,7 +37,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -53,12 +54,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.14, 8.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.14, 8.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.14, 8.0.14]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.14, 8.0.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/256/sdk/8.0.407/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

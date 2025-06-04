@@ -12,3 +12,18 @@
 /home/a2023952608/BatalhaNaval/Player2/obj/Debug/net8.0/Player2.pdb
 /home/a2023952608/BatalhaNaval/Player2/obj/Debug/net8.0/Player2.genruntimeconfig.cache
 /home/a2023952608/BatalhaNaval/Player2/obj/Debug/net8.0/ref/Player2.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\bin\Debug\net8.0\Player2.exe
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\bin\Debug\net8.0\Player2.deps.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\bin\Debug\net8.0\Player2.runtimeconfig.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\bin\Debug\net8.0\Player2.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\bin\Debug\net8.0\Player2.pdb
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\Player2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\Player2.AssemblyInfoInputs.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\Player2.AssemblyInfo.cs
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\Player2.csproj.CoreCompileInputs.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\Player2.sourcelink.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\Player2.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\refint\Player2.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\Player2.pdb
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\Player2.genruntimeconfig.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\BatalhaNaval\Player2\obj\Debug\net8.0\ref\Player2.dll

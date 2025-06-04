@@ -1,0 +1,15 @@
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\Api.AssemblyInfoInputs.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\Api.AssemblyInfo.cs
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\Api.csproj.CoreCompileInputs.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\Api.sourcelink.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\bin\Debug\net9.0\Api.exe
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\bin\Debug\net9.0\Api.deps.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\bin\Debug\net9.0\Api.runtimeconfig.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\bin\Debug\net9.0\Api.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\bin\Debug\net9.0\Api.pdb
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\Api.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\refint\Api.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\Api.pdb
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\Api.genruntimeconfig.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\Api\obj\Debug\net9.0\ref\Api.dll

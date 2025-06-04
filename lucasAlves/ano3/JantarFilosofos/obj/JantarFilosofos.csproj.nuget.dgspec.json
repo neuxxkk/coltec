@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/home/a2023952608/coltec-1/lucasAlves/ano3/JantarFilosofos/JantarFilosofos.csproj": {}
+    "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\JantarFilosofos\\JantarFilosofos.csproj": {}
   },
   "projects": {
-    "/home/a2023952608/coltec-1/lucasAlves/ano3/JantarFilosofos/JantarFilosofos.csproj": {
+    "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\JantarFilosofos\\JantarFilosofos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/a2023952608/coltec-1/lucasAlves/ano3/JantarFilosofos/JantarFilosofos.csproj",
+        "projectUniqueName": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\JantarFilosofos\\JantarFilosofos.csproj",
         "projectName": "JantarFilosofos",
-        "projectPath": "/home/a2023952608/coltec-1/lucasAlves/ano3/JantarFilosofos/JantarFilosofos.csproj",
-        "packagesPath": "/home/a2023952608/.nuget/packages/",
-        "outputPath": "/home/a2023952608/coltec-1/lucasAlves/ano3/JantarFilosofos/obj/",
+        "projectPath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\JantarFilosofos\\JantarFilosofos.csproj",
+        "packagesPath": "C:\\Users\\vitor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\JantarFilosofos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/a2023952608/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\vitor\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -37,11 +37,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "imports": [
             "net461",
             "net462",
@@ -58,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/256/sdk/8.0.407/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

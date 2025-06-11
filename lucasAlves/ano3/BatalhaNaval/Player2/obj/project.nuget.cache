@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PAC+Oz8KXnM=",
+  "dgSpecHash": "UUrNRn71aRE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\BatalhaNaval\\Player2\\Player2.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\vitor\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.14\\microsoft.netcore.app.ref.8.0.14.nupkg.sha512",
-    "C:\\Users\\vitor\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.14\\microsoft.windowsdesktop.app.ref.8.0.14.nupkg.sha512",
-    "C:\\Users\\vitor\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.14\\microsoft.aspnetcore.app.ref.8.0.14.nupkg.sha512",
-    "C:\\Users\\vitor\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.14\\microsoft.netcore.app.host.win-x64.8.0.14.nupkg.sha512"
-  ],
+  "projectFilePath": "/home/a2023952608/BatalhaNaval/Player2/Player2.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

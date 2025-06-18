@@ -1,0 +1,15 @@
+/home/a2023952608/coltec/lucasAlves/ano3/Api/bin/Debug/net8.0/Api
+/home/a2023952608/coltec/lucasAlves/ano3/Api/bin/Debug/net8.0/Api.deps.json
+/home/a2023952608/coltec/lucasAlves/ano3/Api/bin/Debug/net8.0/Api.runtimeconfig.json
+/home/a2023952608/coltec/lucasAlves/ano3/Api/bin/Debug/net8.0/Api.dll
+/home/a2023952608/coltec/lucasAlves/ano3/Api/bin/Debug/net8.0/Api.pdb
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/Api.GeneratedMSBuildEditorConfig.editorconfig
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/Api.AssemblyInfoInputs.cache
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/Api.AssemblyInfo.cs
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/Api.csproj.CoreCompileInputs.cache
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/Api.sourcelink.json
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/Api.dll
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/refint/Api.dll
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/Api.pdb
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/Api.genruntimeconfig.cache
+/home/a2023952608/coltec/lucasAlves/ano3/Api/obj/Debug/net8.0/ref/Api.dll

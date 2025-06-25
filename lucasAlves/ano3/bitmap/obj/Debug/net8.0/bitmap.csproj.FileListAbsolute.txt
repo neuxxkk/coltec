@@ -1,0 +1,14 @@
+/home/a2023952608/bitmap/obj/Debug/net8.0/bitmap.GeneratedMSBuildEditorConfig.editorconfig
+/home/a2023952608/bitmap/obj/Debug/net8.0/bitmap.AssemblyInfoInputs.cache
+/home/a2023952608/bitmap/obj/Debug/net8.0/bitmap.AssemblyInfo.cs
+/home/a2023952608/bitmap/obj/Debug/net8.0/bitmap.csproj.CoreCompileInputs.cache
+/home/a2023952608/bitmap/bin/Debug/net8.0/bitmap
+/home/a2023952608/bitmap/bin/Debug/net8.0/bitmap.deps.json
+/home/a2023952608/bitmap/bin/Debug/net8.0/bitmap.runtimeconfig.json
+/home/a2023952608/bitmap/bin/Debug/net8.0/bitmap.dll
+/home/a2023952608/bitmap/bin/Debug/net8.0/bitmap.pdb
+/home/a2023952608/bitmap/obj/Debug/net8.0/bitmap.dll
+/home/a2023952608/bitmap/obj/Debug/net8.0/refint/bitmap.dll
+/home/a2023952608/bitmap/obj/Debug/net8.0/bitmap.pdb
+/home/a2023952608/bitmap/obj/Debug/net8.0/bitmap.genruntimeconfig.cache
+/home/a2023952608/bitmap/obj/Debug/net8.0/ref/bitmap.dll

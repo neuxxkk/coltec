@@ -1,0 +1,15 @@
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/bin/Release/net8.0/RPG
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/bin/Release/net8.0/RPG.deps.json
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/bin/Release/net8.0/RPG.runtimeconfig.json
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/bin/Release/net8.0/RPG.dll
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/bin/Release/net8.0/RPG.pdb
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/RPG.GeneratedMSBuildEditorConfig.editorconfig
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/RPG.AssemblyInfoInputs.cache
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/RPG.AssemblyInfo.cs
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/RPG.csproj.CoreCompileInputs.cache
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/RPG.sourcelink.json
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/RPG.dll
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/refint/RPG.dll
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/RPG.pdb
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/RPG.genruntimeconfig.cache
+/home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Release/net8.0/ref/RPG.dll

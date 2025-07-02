@@ -13,3 +13,18 @@
 /home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Debug/net8.0/RPG.pdb
 /home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Debug/net8.0/RPG.genruntimeconfig.cache
 /home/a2023952608/coltec/lucasAlves/ano3/RPG/obj/Debug/net8.0/ref/RPG.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\bin\Debug\net8.0\RPG.exe
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\bin\Debug\net8.0\RPG.deps.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\bin\Debug\net8.0\RPG.runtimeconfig.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\bin\Debug\net8.0\RPG.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\bin\Debug\net8.0\RPG.pdb
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\RPG.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\RPG.AssemblyInfoInputs.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\RPG.AssemblyInfo.cs
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\RPG.csproj.CoreCompileInputs.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\RPG.sourcelink.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\RPG.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\refint\RPG.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\RPG.pdb
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\RPG.genruntimeconfig.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\RPG\obj\Debug\net8.0\ref\RPG.dll

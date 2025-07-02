@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "hhUmavF0fUI=",
+  "dgSpecHash": "OxQ6T+e1MDg=",
   "success": true,
-  "projectFilePath": "/home/a2023952608/coltec/lucasAlves/ano3/RPG/RPG.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\coltec-1\\lucasAlves\\ano3\\RPG\\RPG.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\vitor\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.14\\microsoft.netcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\vitor\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.14\\microsoft.windowsdesktop.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\vitor\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.14\\microsoft.aspnetcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\vitor\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.14\\microsoft.netcore.app.host.win-x64.8.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

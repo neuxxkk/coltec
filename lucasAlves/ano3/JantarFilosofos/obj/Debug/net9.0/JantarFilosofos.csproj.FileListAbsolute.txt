@@ -1,0 +1,15 @@
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\bin\Debug\net9.0\JantarFilosofos.exe
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\bin\Debug\net9.0\JantarFilosofos.deps.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\bin\Debug\net9.0\JantarFilosofos.runtimeconfig.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\bin\Debug\net9.0\JantarFilosofos.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\bin\Debug\net9.0\JantarFilosofos.pdb
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\JantarFilosofos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\JantarFilosofos.AssemblyInfoInputs.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\JantarFilosofos.AssemblyInfo.cs
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\JantarFilosofos.csproj.CoreCompileInputs.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\JantarFilosofos.sourcelink.json
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\JantarFilosofos.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\refint\JantarFilosofos.dll
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\JantarFilosofos.pdb
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\JantarFilosofos.genruntimeconfig.cache
+C:\Users\vitor\OneDrive\Área de Trabalho\coltec-1\lucasAlves\ano3\JantarFilosofos\obj\Debug\net9.0\ref\JantarFilosofos.dll
